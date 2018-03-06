@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/nyc-style.css">
+    <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
   </head>
   <body>
     <main>
@@ -21,8 +22,10 @@
       <div id="slide">
       </div>
 
-      <footer>
+      <footer class="footer">
+        <center>
         	&trade; NYC-Reise.no
+        </center>
       </footer>
     </main>
   </body>
