@@ -19,7 +19,6 @@
       <div class="nav"></div>
 
       <div id="slide">
-        William er homo
       </div>
 
       <footer>
