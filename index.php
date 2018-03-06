@@ -18,7 +18,9 @@
 
       <div class="nav"></div>
 
-      <div id="slide"></div>
+      <div id="slide">
+        William er homo
+      </div>
 
       <footer>
         	&trade; NYC-Reise.no
