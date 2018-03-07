@@ -17,10 +17,18 @@
         <h3>Om oss<h3>
       </nav>
 
+
       <div class="nav"></div>
+      <br><br>
+      <div class="container">
+        <center>
+        <img src="bilder/collage.jpg" width="80%">
+        </center>
+      </div>
 
       <div id="slide">
       </div>
+
 
       <footer class="footer">
         <center>
