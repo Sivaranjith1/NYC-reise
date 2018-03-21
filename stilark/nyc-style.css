@@ -76,3 +76,51 @@ nav h3:hover {
   text-decoration: none;
   color: inherit;
 }
+
+ul
+{ margin: 2px 0 22px 17px;}
+
+ul li { 
+  list-style-type: circle;
+  margin: 0 0 6px 0; 
+  padding: 0 0 4px 5px;
+}
+
+
+  .kategori {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .kategori ul {  
+    display: inline-flex;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .kategori ul li {
+    padding-top: 5px;
+    list-style-type: none;
+  }
+
+  .button {
+    box-shadow: inset 0 0 0 3px #6cc091;
+    color: #6cc091 !important;
+    border: 0px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: 400;
+    height: 3.75em;
+    line-height: 3.85em;
+    letter-spacing: 2px;
+    padding: 0 3em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    list-style-type: none;
+    margin: auto;
+    justify-content: center;
+      }
+

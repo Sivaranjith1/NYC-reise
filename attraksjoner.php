@@ -7,6 +7,15 @@
   </head>
   <body>
     <main>
+        <div class="kategori">
+            
+              <ul>
+                <div>
+                    <li><a href="#" class="button">Kjøttrester</a></li>
+                </div>
+              </ul>
+        </div>
+
 
       <footer>
         	&trade; NYC-Reise.no
