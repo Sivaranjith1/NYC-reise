@@ -10,17 +10,15 @@
     <main>
       <div class="banner">
       </div>
-      <nav>
-        <h3>Hjem</h3>
-        <h3>Overnatting</h3>
-        <h3>Reise dit</h3>
-        <h3>Attraksjoner</h3>
-        <h3>Om oss<h3>
-      </nav>
 
-      <div class="nav"></div>
-      <br><br>
+        <a href="index.php" class="btn">Hjem</a>
+        <a href="overnatting.php" class="btn">Overnatting</a>
+        <a href="reisedit.php" class="btn">Reise dit</a>
+        <a href="attraksjoner.php" class="btn">Attraksjoner</a>
+        <a href="about.php>" class="btn">Om oss</a>
+
       <div class="container">
+        <br><br>
         <center>
         <h2>Reise til New York.</h2>
         </center>
@@ -34,36 +32,9 @@
       </div>
 
 
-<footer class="footer-distributed">
-
-      <div class="footer-right">
-
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-github"></i></a>
-
-      </div>
-
-      <div class="footer-left">
-
-        <p class="footer-links">
-          <a href="#">Hjem</a>
-          ·
-          <a href="#">Overnatting</a>
-          ·
-          <a href="#">Reise dit</a>
-          ·
-          <a href="#">Overnatting</a>
-          ·
-          <a href="#">Om oss</a>
-          ·
-        </p>
-
-        <p>NYC-Reise.no &copy; 2018</p>
-      </div>
-
-    </footer>
+    <div class="footer">
+       <p>NYC-Reise &trade;</p>
+    </div>
 
     </main>
   </body>
