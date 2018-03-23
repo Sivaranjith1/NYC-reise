@@ -14,8 +14,25 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+
 .nav {
   display: inline-flex;
+  position: fixed;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0;   
+  height: 50px;
+  right: 0;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
+  background-color: #0e0e0e;
+
+}
+
+.navbox {
+  display: flex;
+  width: 60vw;  
 }
 
 .container {
@@ -25,7 +42,6 @@ body {
 
 .btn{
   color:#999;
-  background:rgba(0, 0, 0, 0.5);
   padding:10px 20px;
   font-size:12px;
   text-decoration:none;
