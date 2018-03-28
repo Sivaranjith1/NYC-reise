@@ -71,18 +71,26 @@
       <textarea name="beskrivelse" id="beskrivelse" cols="30" rows="10" placeholder="Skriv en beskrivelse"></textarea>
 
       <label for="pris">Pris</label>
-      <input type="number" name="pris" id="pris" step="any">
+      <input type="number" name="pris" id="pris" min="0" step=".01">
 
       <h2>Bilder</h2>
       <h3>Legg til minst et bilde</h3>
       <div id="bildeBoks"> 
-      <input type="file" name="bilde[]">
+        <input type="file" name="bilde[]">
+      </div>
+
+      <h2>Kategorier</h2>
+      <h3>Legg til minst en kategori</h3>
+      <div id="katID">
+         <div class="katBoks">
+            <input type="hidden" name="kat[]" value="3">
+            <p>Skyskraper</p>
+         </div>
       </div>
 
       <input type="submit" value="Legg til attraksjon">
       </form>
       <?php
-        
       ?>
     </main>
   </body>
