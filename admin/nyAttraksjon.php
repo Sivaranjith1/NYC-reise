@@ -9,7 +9,7 @@
   <body>
     <main>
 
-      <form action="">
+      <form action="" method="POST">
       <div id="selectPost">
         <label for="poststed">Bydel</label>
         <select name="poststed" id="poststed">
@@ -27,7 +27,7 @@
           ?>
         </select>
       </div>
-      <button>Legg til postnummer</button>
+      <button type="button" onclick="console.log('Legg til postnummer')">Legg til postnummer</button>
       <div id="egenPost">
         <select name="bydel" id="bydel">
           <?php
@@ -81,7 +81,7 @@
 
       <h2>Kategorier</h2>
       <h3>Legg til minst en kategori</h3>
-      <div id="katID">
+      <div id="katID" onclick="console.log('banan')">
          <div class="katBoks">
             <input type="hidden" name="kat[]" value="3">
             <p>Skyskraper</p>
@@ -91,6 +91,7 @@
       <input type="submit" value="Legg til attraksjon">
       </form>
       <?php
+      var_dump($_POST)
       ?>
     </main>
   </body>
