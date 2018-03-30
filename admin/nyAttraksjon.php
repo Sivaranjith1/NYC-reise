@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>NYC-reise</title>
-    <link rel="stylesheet" href=".../stilark/nyc-style.css">
+    <link rel="stylesheet" href="../stilark/style.css">
   </head>
   <body>
     <main>
