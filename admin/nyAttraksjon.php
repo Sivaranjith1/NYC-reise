@@ -15,10 +15,11 @@
           $error = "filen er ikke et bilde";
           $altVirker = false;
       }
-  }
+  
 
-  if ($altVirker) {
-    move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
+    if ($altVirker) {
+      move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
+    } 
   }
 ?>
 <html>
