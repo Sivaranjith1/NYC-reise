@@ -4,10 +4,10 @@
   $altVirker = true;
   $error = '';
 
-  $target_dir = "bilder/";
+  $target_dir = "../bilder/";
   $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  if(isset($_POST["submit"])) {
+  if($altVirker && isset($_POST["submit"])) {
       $check = getimagesize($_FILES["bilde"][0]["tmp_name"]);
       if($check !== false) {
           $altVirker = true;
@@ -15,6 +15,10 @@
           $error = "filen er ikke et bilde";
           $altVirker = false;
       }
+  }
+
+  if ($altVirker) {
+    move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
   }
 ?>
 <html>
@@ -134,6 +138,7 @@
       </form>
       <?php
       var_dump($_POST);
+      var_dump($_FILES["bilde"]);
       ?>
     </main>
   </body>
