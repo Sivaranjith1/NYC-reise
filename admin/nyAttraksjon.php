@@ -132,6 +132,17 @@
   </head>
   <body>
     <main>
+      <div class="varsel">
+        <?php
+          if($altVirker == false){
+            echo "<h1>";
+            echo "<strong>Varsel:</strong>";
+            echo $error;
+            echo "</h1>";
+          }
+        ?>
+      </div>
+
       <form action="" method="POST" enctype="multipart/form-data">
       <p>Register ny postnummer</p>
       <label class="switch">
@@ -232,10 +243,6 @@
             <input type="text" id="nyKat">
             <button type="button" onclick="leggTilNy()">Legg til</button>  
           </div>
-        </div>
-        <div class="katBoks">
-          <input type="hidden" name="kat[]" value="3">
-          <p>Skyskraper</p>
         </div>
         <button type="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
       </div>
