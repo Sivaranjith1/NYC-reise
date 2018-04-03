@@ -5,10 +5,31 @@
   $error = '';
 
   $target_dir = "../bilder/";
-  if($altVirker && isset($_POST["submit"])) {    
+  if($altVirker && isset($_POST["submit"])) {
+      $egenPost = (isset($_POST["egenPost"]) ? true : false);
+      $poststed = $_POST["poststed"];
+
+      //postadresse
+      if ($egenPost) {
+        $bydel = $_POST["bydel"];
+        $postnum = $_POST["postnum"];
+        $postst = $_POST["postst"];
+        $sql = "INSERT INTO `poststed` (`postnummer`, `Poststed`, `idbydel`) 
+                VALUES ('".$postnum."', '".$postst."', '".$bydel."')";
+
+        if ($kobling->query($sql)) {
+          $poststed = $kobling->insert_id;
+        } else {
+          $error = $kobling->error;
+          $altVirker = false;
+        }
+
+      }
+
+
       $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
       $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-      $check = getimagesize($_FILES["bilde"][0]["tmp_name"]);
+      $check = getimagesize($_FILES["bilde"]["tmp_name"][0]);
       if($check !== false) {
           $altVirker = true;
       } else {
@@ -17,7 +38,7 @@
       }
   
 
-    if ($altVirker) {
+    if ($altVirker == true) {
       move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
     } 
   }
@@ -30,7 +51,6 @@
   </head>
   <body>
     <main>
-
       <form action="" method="POST" enctype="multipart/form-data">
       <p>Register ny postnummer</p>
       <label class="switch">
@@ -107,7 +127,7 @@
       <h3>Legg til minst et bilde</h3>
       <div id="bildeID"> 
         <div class="bildeBoks">
-        <input type="file" name="bilde[]">
+        <input type="file" name="bilde[]" required>
         </div>
 
         <button type="button">+</button>
@@ -135,11 +155,13 @@
          <button type="button">+</button>
       </div>
 
-      <input type="submit" value="Legg til attraksjon">
+      <input type="submit" name="submit" value="Legg til attraksjon">
       </form>
       <?php
       var_dump($_POST);
+      echo "<h2>Bilder</h2>";
       var_dump($_FILES["bilde"]);
+      echo "<h1>postnum</h1>";
       ?>
     </main>
   </body>
