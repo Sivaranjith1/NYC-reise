@@ -6,37 +6,70 @@
 
   $target_dir = "../bilder/";
   if($altVirker && isset($_POST["submit"])) {
-      $egenPost = (isset($_POST["egenPost"]) ? true : false);
-      $poststed = $_POST["poststed"];
+    $egenPost = (isset($_POST["egenPost"]) ? true : false);
+    $poststed = $_POST["poststed"];
+    $navn = $_POST["navn"];
+    $aapningstid = $_POST["aapningstid"];
+    $stengetid = $_POST["stengetid"];
+    $addresse = $_POST["addresse"];
+    $gatenr = $_POST["gatenr"];
+    $beskrivelse = $_POST["beskrivelse"];
+    $pris = $_POST["pris"];
+    
+    $kategori = $_POST["kat"];
+    $bildeIder = [];
 
-      //postadresse
-      if ($egenPost) {
-        $bydel = $_POST["bydel"];
-        $postnum = $_POST["postnum"];
-        $postst = $_POST["postst"];
-        $sql = "INSERT INTO `poststed` (`postnummer`, `Poststed`, `idbydel`) 
-                VALUES ('".$postnum."', '".$postst."', '".$bydel."')";
+    //postadresse
+    if ($egenPost) {
+      $bydel = $_POST["bydel"];
+      $postnum = $_POST["postnum"];
+      $postst = $_POST["postst"];
+      $sql = "INSERT INTO `poststed` (`postnummer`, `Poststed`, `idbydel`) 
+              VALUES ('".$postnum."', '".$postst."', '".$bydel."')";
+
+      if ($kobling->query($sql)) {
+        $poststed = $kobling->insert_id;
+      } else {
+        $error = $kobling->error;
+        $altVirker = false;
+      }
+
+    }
+
+    //kategori
+    if($altVirker && isset($_POST["nyKat"])){
+      $nyKat = $_POST["nyKat"];
+
+      foreach($nyKat as $key) {
+        $sql = "INSERT INTO `kategori` (`navn`) VALUES ('".$key."')";
 
         if ($kobling->query($sql)) {
-          $poststed = $kobling->insert_id;
+          $nyKatId = $kobling->insert_id;
+          $kategori[] = $nyKatId;
         } else {
           $error = $kobling->error;
           $altVirker = false;
+          break 1;
         }
-
       }
+    }
 
+    if ($altVirker) {
+      $antallBilder = count($_FILES["bilde"]["name"]);
 
-      $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-      $check = getimagesize($_FILES["bilde"]["tmp_name"][0]);
-      if($check !== false) {
-          $altVirker = true;
-      } else {
-          $error = "filen er ikke et bilde";
-          $altVirker = false;
+      for($i = 0; $i < $antallBilder; $i++){
+        $target_file = $target_dir . basename($_FILES["bilde"]["name"][i]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["bilde"]["tmp_name"][i]);
+        if($check !== false) {
+            $altVirker = true;
+        } else {
+            $error = "filen er ikke et bilde";
+            $altVirker = false;
+            break 1;
+        }
       }
-  
+    }
 
     if ($altVirker == true) {
       move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
@@ -130,12 +163,12 @@
         <input type="file" name="bilde[]" required>
         </div>
 
-        <button type="button">+</button>
+        <button type="button" id="leggTilBildeKnapp" onclick="leggTilBilde()">+</button>
       </div>
 
       <h2>Kategorier</h2>
       <div id="katID">
-        <div class="kategorier">
+        <div class="kategorier" style="display: none;">
           <?php 
              $sql = "SELECT * FROM kategori";
              $resultat = $kobling->query($sql);
@@ -144,25 +177,77 @@
                $id = $rad["idkategori"];
                $navn = $rad["navn"];
 
-               echo '<p><span class="id" style="visibility:hidden;">'.$id.'</span><span class="navn">'.$navn.'</span></p>';
+               echo '<p><span onclick="lagHidden('.$id.', `'.$navn.'`)">'.$navn.'</span></p>';
              }
           ?>
+          <div class="ny">
+            <input type="text" id="nyKat">
+            <button type="button" onclick="leggTilNy()">Legg til</button>  
+          </div>
         </div>
-         <div class="katBoks">
-            <input type="hidden" name="kat[]" value="3">
-            <p>Skyskraper</p>
-         </div>
-         <button type="button">+</button>
+        <div class="katBoks">
+          <input type="hidden" name="kat[]" value="3">
+          <p>Skyskraper</p>
+        </div>
+        <button type="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
       </div>
 
       <input type="submit" name="submit" value="Legg til attraksjon">
       </form>
-      <?php
-      var_dump($_POST);
-      echo "<h2>Bilder</h2>";
-      var_dump($_FILES["bilde"]);
-      echo "<h1>postnum</h1>";
-      ?>
     </main>
+
+    <script>
+     let katBoks = document.querySelector('.kategorier');
+     let katID = document.querySelector('#katID');
+     let fraFor = [];
+
+     function leggTilBilde() {
+       let bildeboks = document.querySelector('#bildeID');
+       let knapp = document.querySelector('#leggTilBildeKnapp');
+
+       let child = document.createElement("div");
+       child.setAttribute("class", "bildeBoks");
+       child.innerHTML = `<input type="file" name="bilde[]">`;
+       bildeboks.appendChild(child);
+       bildeboks.removeChild(knapp);
+       bildeboks.appendChild(knapp);
+     }
+
+     function leggTilKat() {
+       katBoks.style.display = "block";
+     }
+
+     function lagHidden (id, navn) {
+      let finnes = fraFor.includes(id)
+      let knapp = document.querySelector('#leggTilKatKnapp');
+
+      if(!finnes) {
+        let child = document.createElement("div");
+        child.setAttribute("class", "katBoks");
+        child.innerHTML = `<input type="hidden" name="kat[]" value="${id}"><p>${navn}</p>`;
+        katID.appendChild(child);
+        katID.removeChild(knapp);
+        katID.appendChild(knapp);
+        fraFor.push(id);
+      }
+
+      katBoks.style.display = "none";
+     }
+
+     function leggTilNy () {
+      let input = document.querySelector('#nyKat').value;
+      let knapp = document.querySelector('#leggTilKatKnapp');
+
+      let child = document.createElement("div");
+      child.setAttribute("class", "katBoks");
+      child.innerHTML = `<input type="hidden" name="nyKat[]" value="${input}"><p>${input}</p>`;
+      katID.appendChild(child);
+      katID.removeChild(knapp);
+      katID.appendChild(knapp);
+      
+      document.querySelector('#nyKat').value = "";
+      katBoks.style.display = "none";
+     }
+    </script>
   </body>
 </html>
