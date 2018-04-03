@@ -1,5 +1,22 @@
 <!DOCTYPE html>
-<?php include "../kobling.php"; ?>
+<?php 
+  include "../kobling.php"; 
+  $altVirker = true;
+  $error = '';
+
+  $target_dir = "bilder/";
+  $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
+  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  if(isset($_POST["submit"])) {
+      $check = getimagesize($_FILES["bilde"][0]["tmp_name"]);
+      if($check !== false) {
+          $altVirker = true;
+      } else {
+          $error = "filen er ikke et bilde";
+          $altVirker = false;
+      }
+  }
+?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -9,45 +26,53 @@
   <body>
     <main>
 
-      <form action="" method="POST">
-      <div id="selectPost">
-        <label for="poststed">Bydel</label>
-        <select name="poststed" id="poststed">
-          <?php
-            $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel";
-            $resultat = $kobling->query($sql);
+      <form action="" method="POST" enctype="multipart/form-data">
+      <p>Register ny postnummer</p>
+      <label class="switch">
+        <input type="checkbox" name="egenPost">
+        <span class="slider round"></span>
+      </label>
 
-            while ($rad = $resultat -> fetch_assoc()) {
-              $postnummer = $rad["postnummer"];
-              $poststed = $rad["Poststed"];
-              $bydel = $rad["navn"];
-
-              echo '<option value="'.$postnummer.'">'.$postnummer.', '.$poststed.' i '.$bydel.'</option>';
-            }
-          ?>
-        </select>
-      </div>
-      <button type="button" onclick="console.log('Legg til postnummer')">Legg til postnummer</button>
-      <div id="egenPost">
-        <select name="bydel" id="bydel">
-          <?php
-              $sql = "SELECT * FROM bydel";
+      <div class="post">
+        <div id="selectPost">
+          <label for="poststed">Bydel</label>
+          <select name="poststed" id="poststed">
+            <?php
+              $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel";
               $resultat = $kobling->query($sql);
 
               while ($rad = $resultat -> fetch_assoc()) {
+                $postnummer = $rad["postnummer"];
+                $poststed = $rad["Poststed"];
                 $bydel = $rad["navn"];
-                $idbydel = $rad["idbydel"];
 
-                echo '<option value="'.$idbydel.'">'.$bydel.'</option>';
+                echo '<option value="'.$postnummer.'">'.$postnummer.', '.$poststed.' i '.$bydel.'</option>';
               }
-          ?>
-        </select>
+            ?>
+          </select>
+        </div>
+        
+        <div id="egenPost">
+          <select name="bydel" id="bydel">
+            <?php
+                $sql = "SELECT * FROM bydel";
+                $resultat = $kobling->query($sql);
 
-        <label for="postnum">Postnummer</label>
-        <input type="number" name="postnum" id="postnum">
+                while ($rad = $resultat -> fetch_assoc()) {
+                  $bydel = $rad["navn"];
+                  $idbydel = $rad["idbydel"];
 
-        <label for="postst">Poststed</label>
-        <input type="text" name="postst" id="postst" value="NY">
+                  echo '<option value="'.$idbydel.'">'.$bydel.'</option>';
+                }
+            ?>
+          </select>
+
+          <label for="postnum">Postnummer</label>
+          <input type="number" name="postnum" id="postnum">
+
+          <label for="postst">Poststed</label>
+          <input type="text" name="postst" id="postst" value="NY">
+        </div>
       </div>
 
       <h2>Attraksjon</h2>
@@ -75,23 +100,40 @@
 
       <h2>Bilder</h2>
       <h3>Legg til minst et bilde</h3>
-      <div id="bildeBoks"> 
+      <div id="bildeID"> 
+        <div class="bildeBoks">
         <input type="file" name="bilde[]">
+        </div>
+
+        <button type="button">+</button>
       </div>
 
       <h2>Kategorier</h2>
-      <h3>Legg til minst en kategori</h3>
-      <div id="katID" onclick="console.log('banan')">
+      <div id="katID">
+        <div class="kategorier">
+          <?php 
+             $sql = "SELECT * FROM kategori";
+             $resultat = $kobling->query($sql);
+
+             while ($rad = $resultat -> fetch_assoc()) {
+               $id = $rad["idkategori"];
+               $navn = $rad["navn"];
+
+               echo '<p><span class="id" style="visibility:hidden;">'.$id.'</span><span class="navn">'.$navn.'</span></p>';
+             }
+          ?>
+        </div>
          <div class="katBoks">
             <input type="hidden" name="kat[]" value="3">
             <p>Skyskraper</p>
          </div>
+         <button type="button">+</button>
       </div>
 
       <input type="submit" value="Legg til attraksjon">
       </form>
       <?php
-      var_dump($_POST)
+      var_dump($_POST);
       ?>
     </main>
   </body>
