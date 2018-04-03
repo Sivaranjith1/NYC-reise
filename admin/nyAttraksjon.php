@@ -5,9 +5,9 @@
   $error = '';
 
   $target_dir = "../bilder/";
-  $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  if($altVirker && isset($_POST["submit"])) {
+  if($altVirker && isset($_POST["submit"])) {    
+      $target_file = $target_dir . basename($_FILES["bilde"]["name"][0]);
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
       $check = getimagesize($_FILES["bilde"][0]["tmp_name"]);
       if($check !== false) {
           $altVirker = true;
