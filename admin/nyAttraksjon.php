@@ -12,7 +12,7 @@
     $aapningstid = $_POST["aapningstid"];
     $stengetid = $_POST["stengetid"];
     $addresse = $_POST["addresse"];
-    $gatenr = $_POST["gatenr"];
+    $gatenr = (isset($_POST["gatenr"]) ? $_POST["gatenr"] : null);
     $beskrivelse = $_POST["beskrivelse"];
     $pris = $_POST["pris"];
     
@@ -54,15 +54,57 @@
       }
     }
 
+    //insert attraksjon
+    if($altVirker) {
+      $sql = "INSERT INTO `attraksjon` (`Navn`, `aapningstid`, `stengetid`, `addresse`, `gatenr`, `poststed_postnummer`, `beskrivelse`, `pris`) 
+              VALUES ('".$navn."', '".$aapningstid."', '".$stengetid."', '".$addresse."', '".$gatenr."', '".$poststed."', '".$beskrivelse."', '".$pris."')";
+
+      if ($kobling->query($sql)) {
+        $attID = $kobling->insert_id;
+      } else {
+        $error = $kobling->error;
+        $altVirker = false;
+      }
+    }
+
+    //insert attraksjon-kategori
+    if($altVirker){
+      foreach ($kategori as $key) {
+        $sql = "INSERT INTO `kategori_attraksjon` (`idkategori`, `attraksjonsnummer`) VALUES ('".$attID."', '".$key."');";
+        if ($kobling->query($sql)) {
+        } else {
+          $error = $kobling->error;
+          $altVirker = false;
+          break 1;
+        }
+      }
+    }
+    
+
+    //bilder
+    //må legge til senere
     if ($altVirker) {
       $antallBilder = count($_FILES["bilde"]["name"]);
 
       for($i = 0; $i < $antallBilder; $i++){
-        $target_file = $target_dir . basename($_FILES["bilde"]["name"][i]);
+        $target_file = $target_dir . basename($_FILES["bilde"]["name"][$i]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES["bilde"]["tmp_name"][i]);
+        $check = getimagesize($_FILES["bilde"]["tmp_name"][$i]);
         if($check !== false) {
             $altVirker = true;
+            move_uploaded_file($_FILES["bilde"]["tmp_name"][$i], $target_file);
+
+            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `attraksjonsnummer`) VALUES ('".$target_file."', '".$attID."')";
+            if ($kobling->query($sql)) {
+              if($i == 0) {
+                $hovedBilde = $kobling->insert_id;
+              }
+            } else {
+              $error = $kobling->error;
+              $altVirker = false;
+              break 1;
+            }
+
         } else {
             $error = "filen er ikke et bilde";
             $altVirker = false;
@@ -71,9 +113,15 @@
       }
     }
 
-    if ($altVirker == true) {
-      move_uploaded_file($_FILES["bilde"]["tmp_name"][0], $target_file);
-    } 
+    //update hovedbilde
+    if($altVirker) {
+      $sql = "UPDATE `attraksjon` SET `hovedbilde`='".$hovedBilde."' WHERE `attraksjon_nummer`='".$attID."'";
+      if ($kobling->query($sql)) {
+      } else {
+        $error = $kobling->error;
+        $altVirker = false;
+      }
+    }
   }
 ?>
 <html>
