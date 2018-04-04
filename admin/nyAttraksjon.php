@@ -163,7 +163,7 @@
       </div>
 
       <form action="" method="POST" enctype="multipart/form-data">
-      <p>Register ny postnummer</p>
+      <p>Register nytt postnummer</p>
       <label class="switch">
         <input type="checkbox" name="egenPost">
         <span class="slider round"></span>
