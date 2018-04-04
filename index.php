@@ -9,6 +9,11 @@
   <body>
     <main>
       <div class="container"> 
+        <video width="600" height="100" controls autoplay loop>
+          <source src="bilder/animasjon.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+        </video>
+
 
       <div class="nav">
         <a href="index.php" class="btn">Hjem</a>
@@ -18,12 +23,6 @@
         <a href="about.php" class="btn">Om oss</a>
         <a href="admin/nyAttraksjon.php" class="btn">Admin</a>
       </div>
-
-        <video width="600" height="100" controls autoplay loop>
-          <source src="bilder/animasjon.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-        </video>
-
         <br><br>
         <center>
         <h2>Reise til New York.</h2>
