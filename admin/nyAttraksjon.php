@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>NYC-reise</title>
+    <link rel="stylesheet" href="stilark/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+  </head>
+  <body>
+    <main>
+      <div class="container"> 
+
+      <div class="nav">
+        <a href="../index.php" class="btn">Hjem</a>
+        <a href="overnatting.php" class="btn">Overnatting</a>
+        <a href="reisedit.php" class="btn">Reise dit</a>
+        <a href="attraksjoner.php" class="btn">Attraksjoner</a>
+        <a href="about.php>" class="btn">Om oss</a>
+      </div>
 <?php 
   include "../kobling.php"; 
   $altVirker = true;
@@ -124,6 +142,7 @@
     }
   }
 ?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -148,7 +167,7 @@
       </div>
 
       <form action="" method="POST" enctype="multipart/form-data">
-      <p>Register ny postnummer</p>
+      <p>Register nytt postnummer</p>
       <label class="switch">
         <input type="checkbox" name="egenPost">
         <span class="slider round"></span>
@@ -190,7 +209,7 @@
 
           <label for="postnum">Postnummer</label>
           <input type="number" name="postnum" id="postnum">
-
+          <br><br>
           <label for="postst">Poststed</label>
           <input type="text" name="postst" id="postst" value="NY">
         </div>
