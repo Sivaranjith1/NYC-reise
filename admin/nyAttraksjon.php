@@ -237,7 +237,7 @@
         <input class="button" type="file" name="bilde[]" required>
         </div>
 
-        <button class="button" id="leggTilBildeKnapp" onclick="leggTilBilde()">Legg til flere bilder</button>
+        <button type="button" class="button" id="leggTilBildeKnapp" onclick="leggTilBilde()">Legg til flere bilder</button>
       </div>
 
       <h2>Kategorier</h2>
@@ -256,10 +256,10 @@
           ?>
           <div class="ny">
             <input type="text" id="nyKat">
-            <button class="button" onclick="leggTilNy()">Legg til</button>  
+            <button type="button" class="button" onclick="leggTilNy()">Legg til</button>  
           </div>
         </div>
-        <button class="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
+        <button type="button" class="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
       </div>
 
       <input type="submit" name="submit" value="Legg til attraksjon">
@@ -278,7 +278,7 @@
 
        let child = document.createElement("div");
        child.setAttribute("class", "bildeBoks");
-       child.innerHTML = `<input type="file" name="bilde[]">`;
+       child.innerHTML = `<input type="file" class="button" name="bilde[]">`;
        bildeboks.appendChild(child);
        bildeboks.removeChild(knapp);
        bildeboks.appendChild(knapp);
@@ -295,7 +295,7 @@
       if(!finnes) {
         let child = document.createElement("div");
         child.setAttribute("class", "katBoks");
-        child.innerHTML = `<input type="hidden" name="kat[]" value="${id}"><p>${navn}</p>`;
+        child.innerHTML = `<input type="hidden" class="button" name="kat[]" value="${id}"><p>${navn}</p>`;
         katID.appendChild(child);
         katID.removeChild(knapp);
         katID.appendChild(knapp);
