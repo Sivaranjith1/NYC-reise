@@ -1,22 +1,5 @@
 <!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="utf-8">
-    <title>NYC-reise</title>
-    <link rel="stylesheet" href="stilark/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
-  </head>
-  <body>
-    <main>
-      <div class="container"> 
-
-      <div class="nav">
-        <a href="../index.php" class="btn">Hjem</a>
-        <a href="overnatting.php" class="btn">Overnatting</a>
-        <a href="reisedit.php" class="btn">Reise dit</a>
-        <a href="attraksjoner.php" class="btn">Attraksjoner</a>
-        <a href="about.php>" class="btn">Om oss</a>
-      </div>
+    
 <?php 
   include "../kobling.php"; 
   $altVirker = true;
@@ -54,6 +37,19 @@
 
     }
 
+    //insert attraksjon
+    if($altVirker) {
+      $sql = "INSERT INTO `attraksjon` (`Navn`, `aapningstid`, `stengetid`, `addresse`, `gatenr`, `poststed_postnummer`, `beskrivelse`, `pris`) 
+              VALUES ('".$navn."', '".$aapningstid."', '".$stengetid."', '".$addresse."', '".$gatenr."', '".$poststed."', '".$beskrivelse."', '".$pris."')";
+
+      if ($kobling->query($sql)) {
+        $attID = $kobling->insert_id;
+      } else {
+        $error = $kobling->error;
+        $altVirker = false;
+      }
+    }
+
     //kategori
     if($altVirker && isset($_POST["nyKat"])){
       $nyKat = $_POST["nyKat"];
@@ -69,19 +65,6 @@
           $altVirker = false;
           break 1;
         }
-      }
-    }
-
-    //insert attraksjon
-    if($altVirker) {
-      $sql = "INSERT INTO `attraksjon` (`Navn`, `aapningstid`, `stengetid`, `addresse`, `gatenr`, `poststed_postnummer`, `beskrivelse`, `pris`) 
-              VALUES ('".$navn."', '".$aapningstid."', '".$stengetid."', '".$addresse."', '".$gatenr."', '".$poststed."', '".$beskrivelse."', '".$pris."')";
-
-      if ($kobling->query($sql)) {
-        $attID = $kobling->insert_id;
-      } else {
-        $error = $kobling->error;
-        $altVirker = false;
       }
     }
 
@@ -148,9 +131,18 @@
     <meta charset="utf-8">
     <title>NYC-reise</title>
     <link rel="stylesheet" href="../stilark/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
   </head>
   <body>
     <main>
+    <div class="container">
+      <div class="nav">
+        <a href="../index.php" class="btn">Hjem</a>
+        <a href="overnatting.php" class="btn">Overnatting</a>
+        <a href="reisedit.php" class="btn">Reise dit</a>
+        <a href="attraksjoner.php" class="btn">Attraksjoner</a>
+        <a href="about.php>" class="btn">Om oss</a>
+      </div>
       <div class="varsel">
         <?php
           if($altVirker == false){
@@ -272,6 +264,7 @@
 
       <input type="submit" name="submit" value="Legg til attraksjon">
       </form>
+    </div>
     </main>
 
     <script>
