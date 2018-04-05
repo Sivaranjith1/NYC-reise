@@ -40,6 +40,17 @@ body {
   height: 60%;
 }
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .btn{
   color:#999;
   padding:10px 20px;
@@ -127,6 +138,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+
+
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -136,6 +149,28 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+
+input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=time], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 
 input[type=submit] {
     width: 100%;
@@ -165,4 +200,16 @@ div {
 
 .kategorier {
   background: #987373;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
 }
