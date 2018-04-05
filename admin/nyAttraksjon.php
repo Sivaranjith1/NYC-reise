@@ -238,10 +238,10 @@
       <h3>Legg til minst et bilde</h3>
       <div id="bildeID"> 
         <div class="bildeBoks">
-        <input type="file" name="bilde[]" required>
+        <input class="button" type="file" name="bilde[]" required>
         </div>
 
-        <button type="button" id="leggTilBildeKnapp" onclick="leggTilBilde()">+</button>
+        <button class="button" id="leggTilBildeKnapp" onclick="leggTilBilde()">Legg til flere bilder</button>
       </div>
 
       <h2>Kategorier</h2>
@@ -260,10 +260,10 @@
           ?>
           <div class="ny">
             <input type="text" id="nyKat">
-            <button type="button" onclick="leggTilNy()">Legg til</button>  
+            <button class="button" onclick="leggTilNy()">Legg til</button>  
           </div>
         </div>
-        <button type="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
+        <button class="button" id="leggTilKatKnapp" onclick="leggTilKat()">+</button>
       </div>
 
       <input type="submit" name="submit" value="Legg til attraksjon">
