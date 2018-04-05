@@ -135,10 +135,14 @@
       <div class="varsel">
         <?php
           if($altVirker == false){
-            echo "<h1>";
+            echo "<div class='red'><h1>";
             echo "<strong>Varsel:</strong>";
             echo $error;
-            echo "</h1>";
+            echo "</h1></div>";
+          } else {
+            echo "<div class='green'><h1>";
+            echo "Ny Attraksjon registret";
+            echo "</h1></div>";
           }
         ?>
       </div>
