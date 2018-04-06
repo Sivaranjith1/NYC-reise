@@ -21,7 +21,7 @@
         <div class="logo">
           <h1><u>New York Reiser</u></h1>
         </div>
-        <video width="600" height="100" controls="false" autoplay="autoplay" loop>
+        <video id="ad" width="600" height="100" controls="false" autoplay="autoplay" loop>
           <source src="bilder/animasjon.mp4" type="video/mp4">
               Your browser does not support the video tag.
         </video>
@@ -35,5 +35,8 @@
     </div>
 
     </main>
+    <script>
+      document.getElementById("ad").controls = false;
+    </script>
   </body>
 </html>
