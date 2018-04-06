@@ -21,11 +21,11 @@
         <div class="logo">
           <h1><u>New York Reiser</u></h1>
         </div>
-        <video width="600" height="100" controls="false" autoplay="autoplay" loop>
+        <video width="600" height="100" controls="false" autoplay="autoplay" loop="loop">
           <source src="bilder/animasjon.mp4" type="video/mp4">
               Your browser does not support the video tag.
         </video>
-        
+
         <center>
         <img src="bilder/collage.jpg" width="80%">
         </center>
