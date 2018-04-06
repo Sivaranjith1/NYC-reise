@@ -22,6 +22,28 @@
         <a href="../attraksjoner.php" class="btn">Attraksjoner</a>
         <a href="../about.php>" class="btn">Om oss</a>
       </div>
+
+      <form action="" method="POST" enctype="multipart/form-data">
+        <label for="navn">Navn på overnatting</label>
+        <input type="text" name="navn" id="navn">
+
+        <label for="pris">pris</label>
+        <input type="number" name="pris" id="pris">
+
+        <label for="stjerne">Stjerner</label>
+        <select name="stjerne" id="stjerne">
+            <?php
+                $sql = "SELECT * FROM stjerner";
+                $resultat = $kobling->query($sql);
+
+                while ($rad = $resultat -> fetch_assoc()) {
+                  $stjerner = $rad["stjerner"];
+
+                  echo '<option value="'.$stjerner.'">'.$stjerner.'</option>';
+                }
+            ?>
+        </select>
+      </form>
     </div>
     </main>
   </body>
