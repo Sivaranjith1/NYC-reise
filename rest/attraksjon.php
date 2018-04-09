@@ -10,10 +10,9 @@
 
         case "GET":
             $storre = isset($_GET["storre"]) ? $_GET["storre"] : '';
-            $storreWhere = $storre == '' ? '' : 'where pris < '.$storre;
+            $storreWhere = $storre == '' ? '' : 'where pris <= '.$storre.' ';
 
-
-            $sql = "SELECT * FROM mydb.overnatting_bilder ".$storreWhere." group by id;";
+            $sql = "SELECT * FROM mydb.overnatting_bilder ".$storreWhere."group by id;";
             $resultat = $kobling->query($sql);
             $json = [];
             while($rad = $resultat->fetch_assoc()) {
