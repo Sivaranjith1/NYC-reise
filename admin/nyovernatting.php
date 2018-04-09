@@ -59,6 +59,32 @@
     }
 
     //legg til bilde
+    if ($altVirker) {
+      $antallBilder = count($_FILES["bilde"]["name"]);
+
+      for($i = 0; $i < $antallBilder; $i++){
+        $target_file = $target_dir . basename($_FILES["bilde"]["name"][$i]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["bilde"]["tmp_name"][$i]);
+        if($check !== false) {
+            $altVirker = true;
+            move_uploaded_file($_FILES["bilde"]["tmp_name"][$i], $target_file);
+
+            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `idovernatting`) VALUES ('".$target_file."', '".$attID."')";
+            if ($kobling->query($sql)) {
+            } else {
+              $error = $kobling->error;
+              $altVirker = false;
+              break 1;
+            }
+
+        } else {
+            $error = "filen er ikke et bilde";
+            $altVirker = false;
+            break 1;
+        }
+      }
+    }
   }
 ?>
 <html>
