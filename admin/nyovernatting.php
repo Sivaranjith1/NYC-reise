@@ -3,6 +3,7 @@
   include "../kobling.php"; 
   $altVirker = true;
   $error = '';
+  $lagt_til = false;
 
   if(isset($_POST["submit"])) {
     $egenPost = (isset($_POST["egenPost"]) ? true : false);
@@ -52,6 +53,7 @@
 
       if ($kobling->query($sql)) {
         $attID = $kobling->insert_id;
+        $lagt_til = true;
       } else {
         $error = $kobling->error;
         $altVirker = false;
@@ -60,17 +62,19 @@
 
     //legg til bilde
     if ($altVirker) {
+      $target_dir = "../bilder/";
       $antallBilder = count($_FILES["bilde"]["name"]);
 
       for($i = 0; $i < $antallBilder; $i++){
         $target_file = $target_dir . basename($_FILES["bilde"]["name"][$i]);
+        $maal_plass = "bilder/" . basename($_FILES["bilde"]["name"][$i]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["bilde"]["tmp_name"][$i]);
         if($check !== false) {
             $altVirker = true;
             move_uploaded_file($_FILES["bilde"]["tmp_name"][$i], $target_file);
 
-            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `idovernatting`) VALUES ('".$target_file."', '".$attID."')";
+            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `idovernatting`) VALUES ('".$maal_plass."', '".$attID."')";
             if ($kobling->query($sql)) {
             } else {
               $error = $kobling->error;
@@ -104,6 +108,20 @@
         <a href="../attraksjoner.php" class="btn">Attraksjoner</a>
         <a href="../about.php" class="btn">Om oss</a>
         <a href="../admin/adminindex.php" class="btn">Admin</a>
+      </div>
+      <div class="varsel">
+        <?php
+          if($altVirker == false){
+            echo "<div class='red'><h1>";
+            echo "<strong>Varsel:</strong>";
+            echo $error;
+            echo "</h1></div>";
+          } else if($lagt_til){
+            echo "<div class='green'><h1>";
+            echo "Ny Overnatting registret";
+            echo "</h1></div>";
+          }
+        ?>
       </div>
 
       <form action="" method="POST" enctype="multipart/form-data">

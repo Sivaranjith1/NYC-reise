@@ -4,6 +4,7 @@
   include "../kobling.php"; 
   $altVirker = true;
   $error = '';
+  $lagt_til = false;
 
   $target_dir = "../bilder/";
   if($altVirker && isset($_POST["submit"])) {
@@ -44,6 +45,7 @@
 
       if ($kobling->query($sql)) {
         $attID = $kobling->insert_id;
+        $lagt_til = true;
       } else {
         $error = $kobling->error;
         $altVirker = false;
@@ -89,13 +91,14 @@
 
       for($i = 0; $i < $antallBilder; $i++){
         $target_file = $target_dir . basename($_FILES["bilde"]["name"][$i]);
+        $maal_plass = "bilder/" . basename($_FILES["bilde"]["name"][$i]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["bilde"]["tmp_name"][$i]);
         if($check !== false) {
             $altVirker = true;
             move_uploaded_file($_FILES["bilde"]["tmp_name"][$i], $target_file);
 
-            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `attraksjonsnummer`) VALUES ('".$target_file."', '".$attID."')";
+            $sql = "INSERT INTO `mydb`.`bilde` (`bilde`, `attraksjonsnummer`) VALUES ('".$maal_plass."', '".$attID."')";
             if ($kobling->query($sql)) {
               if($i == 0) {
                 $hovedBilde = $kobling->insert_id;
@@ -151,7 +154,7 @@
             echo "<strong>Varsel:</strong>";
             echo $error;
             echo "</h1></div>";
-          } else {
+          } else if($lagt_til){
             echo "<div class='green'><h1>";
             echo "Ny Attraksjon registret";
             echo "</h1></div>";
