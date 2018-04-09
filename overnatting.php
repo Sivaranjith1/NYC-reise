@@ -17,6 +17,16 @@
         <a href="about.php>" class="btn">Om oss</a>
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>
+
+      <?php
+        include_once("kobling.php");
+        $sql = "SELECT * FROM mydb.overnatting_bilder group by id;";
+        $resultat = $kobling->query($sql);
+        while($rad = $resultat->fetch_assoc()) {
+            
+        }
+      ?>
+
     </div>
     </main>
   </body>
