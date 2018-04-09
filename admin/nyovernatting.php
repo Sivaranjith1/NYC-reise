@@ -202,18 +202,6 @@
     </div>
     </main>
 
-    <script>
-     function leggTilBilde() {
-       let bildeboks = document.querySelector('#bildeID');
-       let knapp = document.querySelector('#leggTilBildeKnapp');
-
-       let child = document.createElement("div");
-       child.setAttribute("class", "bildeBoks");
-       child.innerHTML = `<input type="file" class="button" name="bilde[]">`;
-       bildeboks.appendChild(child);
-       bildeboks.removeChild(knapp);
-       bildeboks.appendChild(knapp);
-     }
-    </script>
+    <script src="leggtil.js"></script>
   </body>
 </html>
