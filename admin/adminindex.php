@@ -10,7 +10,7 @@
 
       <div class="container">
       <div class="nav">
-        <a href="../index.php" class="btn">Tilkake</a>
+        <a href="../index.php" class="btn">Tilbake</a>
         <a href="nyAttraksjon.php" class="btn">Legg til Attraksjon</a>
         <a href="nyovernatting.php" class="btn">Legg til Overnatting</a>
       </div>
