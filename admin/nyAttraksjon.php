@@ -73,7 +73,7 @@
     //insert attraksjon-kategori
     if($altVirker){
       foreach ($kategori as $key) {
-        $sql = "INSERT INTO `kategori_attraksjon` (`idkategori`, `attraksjonsnummer`) VALUES ('".$attID."', '".$key."');";
+        $sql = "INSERT INTO `kategori_attraksjon` (`attraksjonsnummer`, `idkategori`) VALUES ('".$attID."', '".$key."');";
         if ($kobling->query($sql)) {
         } else {
           $error = $kobling->error;
@@ -174,7 +174,7 @@
           <label for="poststed">Bydel</label>
           <select name="poststed" id="poststed">
             <?php
-              $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel";
+              $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel ORDER BY postnummer ASC";
               $resultat = $kobling->query($sql);
 
               while ($rad = $resultat -> fetch_assoc()) {
@@ -191,7 +191,7 @@
         <div id="egenPost">
           <select name="bydel" id="bydel">
             <?php
-                $sql = "SELECT * FROM bydel";
+                $sql = "SELECT * FROM bydel ORDER BY navn ASC";
                 $resultat = $kobling->query($sql);
 
                 while ($rad = $resultat -> fetch_assoc()) {
@@ -248,7 +248,7 @@
       <div id="katID">
         <div class="kategorier" style="display: none;">
           <?php 
-             $sql = "SELECT * FROM kategori";
+             $sql = "SELECT * FROM kategori ORDER BY navn ASC";
              $resultat = $kobling->query($sql);
 
              while ($rad = $resultat -> fetch_assoc()) {

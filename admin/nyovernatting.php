@@ -136,7 +136,7 @@
           <label for="poststed">Bydel</label>
           <select name="poststed" id="poststed">
             <?php
-              $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel";
+              $sql = "SELECT * FROM poststed JOIN bydel ON poststed.idbydel = bydel.idbydel ORDER BY postnummer ASC";
               $resultat = $kobling->query($sql);
 
               while ($rad = $resultat -> fetch_assoc()) {
@@ -153,7 +153,7 @@
         <div id="egenPost">
           <select name="bydel" id="bydel">
             <?php
-                $sql = "SELECT * FROM bydel";
+                $sql = "SELECT * FROM bydel ORDER BY navn ASC";
                 $resultat = $kobling->query($sql);
 
                 while ($rad = $resultat -> fetch_assoc()) {
@@ -188,7 +188,7 @@
         <label for="stjerne">Stjerner</label>
         <select name="stjerne" id="stjerne">
             <?php
-                $sql = "SELECT * FROM stjerner";
+                $sql = "SELECT * FROM stjerner ORDER BY stjerner DESC";
                 $resultat = $kobling->query($sql);
 
                 while ($rad = $resultat -> fetch_assoc()) {
