@@ -16,9 +16,9 @@
     $addresse = $_POST["addresse"];
     $gatenr = (isset($_POST["gatenr"]) ? $_POST["gatenr"] : null);
     $beskrivelse = $_POST["beskrivelse"];
-    $pris = $_POST["pris"];
+    $pris = (isset($_POST["pris"]) ? $_POST["pris"] : null);;
     
-    $kategori = $_POST["kat"];
+    $kategori = (isset($_POST["kat"]) ? $_POST["kat"] : []);
     $bildeIder = [];
 
     //postadresse
@@ -214,22 +214,22 @@
       <h2>Attraksjon</h2>
 
       <label for="navn">Navn</label>
-      <input type="text" name="navn" id="navn">
+      <input type="text" name="navn" id="navn" required>
 
       <label for="aapningstid">Åpningstid</label>
-      <input type="time" name="aapningstid" id="aapningstid">
+      <input type="time" name="aapningstid" id="aapningstid" required>
 
       <label for="stengetid">Stengetid</label>
-      <input type="time" name="stengetid" id="stengetid">
+      <input type="time" name="stengetid" id="stengetid" required>
 
       <label for="addresse">Adresse</label>
-      <input type="text" name="addresse" id="addresse">
+      <input type="text" name="addresse" id="addresse" required>
 
       <label for="gatenr">Gate nummer</label>
       <input type="number" name="gatenr" id="gatenr">
 
       <label for="beskrivelse">Beskrivelse</label>
-      <textarea name="beskrivelse" id="beskrivelse" cols="30" rows="10" placeholder="Skriv en beskrivelse"></textarea>
+      <textarea name="beskrivelse" id="beskrivelse" cols="30" rows="10" placeholder="Skriv en beskrivelse" required></textarea>
 
       <label for="pris">Pris</label>
       <input type="number" name="pris" id="pris" min="0" step=".01">
@@ -272,14 +272,5 @@
     </main>
 
     <script src="leggtil.js"></script>
-    <script>
-    let postSant = false
-
-    function egenPostKnapp () {
-      postSant = !postSant;
-      console.log(postSant);
-    }
-    
-    </script>
   </body>
 </html>

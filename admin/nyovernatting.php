@@ -127,7 +127,7 @@
       <form action="" method="POST" enctype="multipart/form-data">
       <p>Register nytt postnummer</p>
       <label class="switch">
-        <input type="checkbox" name="egenPost">
+        <input type="checkbox" name="egenPost" onclick="egenPostKnapp();">
         <span class="slider round"></span>
       </label>
 
@@ -173,6 +173,8 @@
         </div>
       </div>
       
+        <h2>Overnatting</h2>
+
         <label for="navn">Navn på overnatting</label>
         <input type="text" name="navn" id="navn">
 
@@ -186,7 +188,7 @@
         <input type="text" name="gatenr" id="gatenr">
 
         <label for="stjerne">Stjerner</label>
-        <select name="stjerne" id="stjerne">
+        <select name="stjerne" id="stjerne" onchange="stjerneEgenSelect(this)">
             <?php
                 $sql = "SELECT * FROM stjerner ORDER BY stjerner DESC";
                 $resultat = $kobling->query($sql);
@@ -199,12 +201,14 @@
             ?>
             <option value="egen">Legg til egen</option>
         </select>
-
-        <label for="egenStjerne">Eget antall stjerne</label>
-        <input type="text" name="egenStjerne" id="egenStjerne">
+        
+        <div class="stjerneEgen">
+          <label for="egenStjerne">Eget antall stjerne</label>
+          <input type="text" name="egenStjerne" id="egenStjerne">
+        </div>
 
         <label for="beskrivelse">Beskrivelse</label>
-        <textarea name="beskrivelse" id="beskrivelse" cols="30" rows="10" placeholder="Skriv en beskrivelse"></textarea>
+        <textarea name="beskrivelse" id="beskrivelse" cols="30" rows="10" placeholder="Skriv en beskrivelse" required></textarea>
 
         <h2>Bilder</h2>
         <h3>Legg til minst et bilde</h3>

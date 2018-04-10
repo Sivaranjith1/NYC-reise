@@ -216,7 +216,7 @@ textarea {
 }
 
 .post {
-  height: 300px;
+  height: 82px;
   position: relative;
   overflow: hidden;
 }
@@ -237,4 +237,10 @@ textarea {
   box-sizing: border-box;
   left: 100%;
   right: auto;
+}
+
+.stjerneEgen {
+  height: 0px;
+  padding: 0px;
+  display: none;
 }

@@ -64,3 +64,50 @@ document.querySelector('#nyKat').value = "";
 katBoks.style.display = "none";
 }
 
+let postSant = false;
+function egenPostKnapp () {
+  postSant = !postSant;
+  let hele = document.querySelector('.post');
+  let eksister = document.querySelector('#selectPost');
+  let ny = document.querySelector('#egenPost');
+
+  if(postSant) {
+    eksister.style.right = "100%";
+    eksister.style.left = "auto";
+
+    ny.style.right = "0%";
+    ny.style.left = "auto";
+
+    hele.style.height = "214px";
+    document.getElementById("postnum").required = true;
+  } else {
+    eksister.style.right = "auto";
+    eksister.style.left = "0";
+
+    ny.style.right = "auto";
+    ny.style.left = "100%";
+
+    hele.style.height = "82px";
+    document.getElementById("postnum").required = false;
+  }
+}
+
+let stjerneEgen = document.querySelector('.stjerneEgen');
+let viser = false;
+function stjerneEgenSelect(dette) {
+  let verdi = dette.value;
+
+  if (dette.value === "egen") {
+    viser = true;
+    stjerneEgen.style.height = "80px";
+    stjerneEgen.style.padding = "20px";
+    stjerneEgen.style.display = "block";
+    document.getElementById("egenStjerne").required = true;
+  } else if (viser) {
+    viser = false;
+    stjerneEgen.style.height = "0px";
+    stjerneEgen.style.padding = "0px";
+    stjerneEgen.style.display = "none";
+    document.getElementById("egenStjerne").required = false;
+  }
+}
