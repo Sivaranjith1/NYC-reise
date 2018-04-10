@@ -47,11 +47,31 @@
           }
 
           //selecter elementene
-          $sql = "SELECT id FROM mydb.attraksjon_kat {$nyArray} ORDER BY navn";
+          $forjeId = 0;
+          $sql = "SELECT * FROM mydb.attraksjon_kat {$nyArray} ORDER BY navn";
           $resultat = $kobling->query($sql);
           while ($rad = $resultat -> fetch_assoc()) {
-            $id = $rad["id"];
-            echo $id.'<br>';
+            $id = $rad["id"]; //id
+            $kategori = $rad["kategori"]; //kat
+
+            if($id == $forjeId) {
+
+            } else {
+              $forjeId = $id;
+              $navn = $rad["Navn"];
+              $aapningstid = $rad["aapningstid"];
+              $stengetid = $rad["stengetid"];
+              $addresse = $rad["addresse"];
+              $gatenr = $rad["gatenr"];
+              $beskrivelse = $rad["beskrivelse"];
+              $pris = $rad["pris"];
+              $bilde = $rad["bilde"];
+              $bydel = $rad["bydelNavn"];
+              $postnummer = $rad["postnummer"];
+              $poststed = $rad["Poststed"];
+              
+              echo $id.' '.$navn.'<br>';
+            }
           }
           
         ?>
