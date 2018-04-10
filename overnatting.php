@@ -20,9 +20,25 @@
 
       <?php
         include_once("kobling.php");
+
         $sql = "SELECT * FROM mydb.overnatting_bilder group by id;";
         $resultat = $kobling->query($sql);
-        while($rad = $resultat->fetch_assoc()) {
+        
+          while($rad = $resultat->fetch_assoc()) {
+              $bildelink = $rad["bilde"];
+              $navn = $rad["navn"];
+              $bydel = $rad["bydel"];
+              $stjerner = $rad["stjerner"];
+              $beskrivelse = $rad["beskrivelse"];
+              $pris = $rad["pris"];
+
+          echo "<table>";
+          echo "<tr>";
+          echo "<td><img src='$bildelink' height='200px'></td>";
+          echo "<td>$navn</td>";
+          echo "<td>$stjerner</td>";
+          echo "</tr>";
+          echo "</table>";
             
         }
       ?>
