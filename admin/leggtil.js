@@ -63,3 +63,4 @@ katID.appendChild(knapp);
 document.querySelector('#nyKat').value = "";
 katBoks.style.display = "none";
 }
+

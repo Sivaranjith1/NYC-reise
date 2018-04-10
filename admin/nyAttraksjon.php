@@ -165,7 +165,7 @@
       <form action="" method="POST" enctype="multipart/form-data">
       <p>Register nytt postnummer</p>
       <label class="switch">
-        <input type="checkbox" name="egenPost">
+        <input type="checkbox" name="egenPost" onclick="egenPostKnapp();">
         <span class="slider round"></span>
       </label>
 
@@ -272,5 +272,14 @@
     </main>
 
     <script src="leggtil.js"></script>
+    <script>
+    let postSant = false
+
+    function egenPostKnapp () {
+      postSant = !postSant;
+      console.log(postSant);
+    }
+    
+    </script>
   </body>
 </html>
