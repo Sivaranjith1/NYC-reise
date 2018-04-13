@@ -243,7 +243,6 @@ textarea {
 .overnatting {
   display: inline-flex;
   flex-wrap: wrap;
-  padding-left: 5px;
 }
 
 .overnattingbox {
