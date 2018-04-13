@@ -30,7 +30,7 @@
         </div>
       </div>
         
-      <h1>Ting å gjøre i New York</h1>
+      <h1>Attraksjoner i New York.</h1>
 
         <?php
           include_once "kobling.php";

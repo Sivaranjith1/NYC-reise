@@ -7,7 +7,6 @@
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
   </head>
   <body>
-    <main>
     <div class="container">
       <div class="nav">
         <a href="index.php" class="btn">Hjem</a>
@@ -18,10 +17,11 @@
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>
 
+      <h1>Våre utvalgte hoteller i New York.</h1>
       <?php
         include_once("kobling.php");
 
-        $sql = "SELECT * FROM mydb.overnatting_bilder group by id;";
+        $sql = "SELECT * FROM mydb.overnatting_bilder group by id ORDER BY stjerner DESC;";
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {
@@ -36,7 +36,7 @@
 
       ?> 
       <div class="overnatting">
-      <div class="overnattingbox">
+        <div class="overnattingbox">
         <div class="overnattingbilde">
           <?php 
             echo "<img src='$bildelink' height='200px' width='300px'>";
@@ -51,6 +51,7 @@
           <?php
             echo "$adresse $gatenr, $bydel";
           ?>
+         </div> 
         <div class="overnattingstjerner">
           <?php
             echo "$stjerner stjerner";
@@ -61,7 +62,7 @@
             echo "<br>$pris kr pr. natt";
           ?>
         </div>
-      </div>
+        </div>
       </div>
 
       <?php      
@@ -69,6 +70,5 @@
       ?>
 
     </div>
-    </main>
   </body>
 </html>
