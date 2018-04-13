@@ -21,7 +21,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   padding-top: 0;   
-  height: 20px;
+  height: 40px;
   right: 0;
   top: 0;
   width: 100%;
@@ -188,11 +188,6 @@ input[type=submit]:hover {
     background-color: #333333;
 }
 
-div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
 
 .kategorier span {
   display: inline-block;
@@ -243,4 +238,16 @@ textarea {
   height: 0px;
   padding: 0px;
   display: none;
+}
+
+.overnatting {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 5px;
+}
+
+.overnattingbox {
+  width: 300px;
+  height: 300px;
+  background-color: white;
 }

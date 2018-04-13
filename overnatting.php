@@ -14,7 +14,7 @@
         <a href="overnatting.php" class="btn">Overnatting</a>
         <a href="reisedit.php" class="btn">Reise dit</a>
         <a href="attraksjoner.php" class="btn">Attraksjoner</a>
-        <a href="about.php>" class="btn">Om oss</a>
+        <a href="about.php" class="btn">Om oss</a>
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>
 
@@ -31,15 +31,40 @@
               $stjerner = $rad["stjerner"];
               $beskrivelse = $rad["beskrivelse"];
               $pris = $rad["pris"];
+              $adresse = $rad["addresse"];
+              $gatenr = $rad["gatenr"];
 
-          echo "<table>";
-          echo "<tr>";
-          echo "<td><img src='$bildelink' height='200px'></td>";
-          echo "<td>$navn</td>";
-          echo "<td>$stjerner</td>";
-          echo "</tr>";
-          echo "</table>";
-            
+      ?> 
+      <div class="overnatting">
+      <div class="overnattingbox">
+        <div class="overnattingbilde">
+          <?php 
+            echo "<img src='$bildelink' height='200px' width='300px'>";
+          ?>
+        </div>
+        <div class="overnattingnavn">
+          <?php
+            echo "$navn";
+          ?>
+        </div>
+        <div class="overnattingadresse">
+          <?php
+            echo "$adresse $gatenr, $bydel";
+          ?>
+        <div class="overnattingstjerner">
+          <?php
+            echo "$stjerner stjerner";
+          ?>
+        </div>
+        <div class="overnattingstjerner">
+          <?php
+            echo "<br>$pris kr pr. natt";
+          ?>
+        </div>
+      </div>
+      </div>
+
+      <?php      
         }
       ?>
 
