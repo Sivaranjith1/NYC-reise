@@ -25,7 +25,7 @@
               VALUES ('".$postnum."', '".$postst."', '".$bydel."')";
 
       if ($kobling->query($sql)) {
-        $poststed = $kobling->insert_id;
+        $poststed = $postnum;
       } else {
         $error = $kobling->error;
         $altVirker = false;
