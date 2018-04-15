@@ -29,7 +29,7 @@
         <center>
         <img src="bilder/collage.jpg" width="80%">
         <?php
-          include_once 'test/xml.php';
+          include_once 'yr/xml.php';
         ?>
         </center>
       </div>
