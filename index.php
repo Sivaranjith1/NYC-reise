@@ -28,6 +28,9 @@
 
         <center>
         <img src="bilder/collage.jpg" width="80%">
+        <?php
+          include_once 'test/xml.php';
+        ?>
         </center>
       </div>
     <div class="footer">

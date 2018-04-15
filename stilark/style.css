@@ -250,3 +250,53 @@ textarea {
   height: 300px;
   background-color: white;
 }
+
+#vearData {
+  display: inline-block;
+  position: relative;
+  width: 90%;
+}
+
+#vearData img {
+  width: 100%;
+}
+
+#vearData #by {
+  position: absolute;
+  color: white;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background-color: #312e2ea6;
+  border-radius: 50px;
+}
+
+.vear {
+  padding: 20px;
+  background-color: #312e2ea6;
+  border-radius: 50px;
+}
+
+#vearNy {
+  width: 100%;
+  position: absolute;
+  top: 155px;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+center img {
+  width: 90%;
+}
+
+.yr {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: #312e2ea6;
+}
