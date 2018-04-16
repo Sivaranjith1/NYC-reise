@@ -249,6 +249,7 @@ textarea {
   width: 300px;
   height: 300px;
   background-color: white;
+  position: relative;
 }
 
 #vearData {
@@ -288,7 +289,7 @@ textarea {
   justify-content: space-around;
 }
 
-center img {
+#collage {
   width: 90%;
 }
 
@@ -299,4 +300,75 @@ center img {
   text-align: center;
   color: white;
   background: #312e2ea6;
+}
+
+.overLenke {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+#slideshow {
+  overflow: hidden;
+  width: 80%;
+  margin: auto;
+  height: 45vw;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.alleSlides {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: left 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arrow-left {
+  z-index: 50;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  transform: rotate(180deg) translateY(50%);
+  border-right: 50px solid black;
+}
+
+.arrow-right {
+  z-index: 50;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  transform: rotate(0deg) translateY(-50%);
+  border-right: 50px solid black;
+}
+
+.arrow-right:hover, .arrow-left:hover {
+  border-right: 50px solid #353535;
+}
+
+.arrow-right:active, .arrow-left:active {
+  border-right: 50px solid #7b7a7a;
 }

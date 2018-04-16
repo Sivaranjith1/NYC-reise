@@ -27,7 +27,7 @@
         </video>
 
         <center>
-        <img src="bilder/collage.jpg" width="80%">
+        <img id="collage" src="bilder/collage.jpg" width="80%">
         <?php
           include_once 'yr/xml.php';
         ?>

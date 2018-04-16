@@ -25,6 +25,7 @@
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {
+              $id = $rad["id"];
               $bildelink = $rad["bilde"];
               $navn = $rad["navn"];
               $bydel = $rad["bydel"];
@@ -37,6 +38,9 @@
       ?> 
       <div class="overnatting">
         <div class="overnattingbox">
+          <?php 
+            echo "<a class='overLenke' href='overnattingDetalje.php?id=$id'></a>"
+          ?>
         <div class="overnattingbilde">
           <?php 
             echo "<img src='$bildelink' height='200px' width='300px'>";
@@ -68,6 +72,10 @@
       <?php      
         }
       ?>
+
+      <div class="footer">
+       <p>NYC-Reise &trade;</p>
+      </div>
 
     </div>
   </body>

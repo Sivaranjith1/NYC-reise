@@ -14,9 +14,11 @@
             $json = [];
             //  $json[] = $rad;
 
+            $nummer = isset($_GET["num"]) ? $_GET["num"] : 2;
             $offset = isset($_GET["offset"]) ? $_GET["offset"] : 5;
+            $forskyvning = $offset * $nummer;
             $sqlArray = '';
-            $sql = "SELECT id FROM mydb.attraksjon_kat {$storreWhere} group by id ORDER BY navn LIMIT {$offset};";
+            $sql = "SELECT id FROM mydb.attraksjon_kat {$storreWhere} group by id ORDER BY navn LIMIT {$offset} OFFSET {$forskyvning};";
             $resultat = $kobling->query($sql);
             while ($rad = $resultat -> fetch_assoc()) {
                 $id = $rad["id"];
