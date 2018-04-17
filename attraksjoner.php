@@ -40,17 +40,20 @@
             <?php
               $sql = "SELECT * FROM bydel ORDER BY navn ASC";
               $resultat = $kobling->query($sql);
-              
+              $num = 0;
               while ($rad = $resultat -> fetch_assoc()) {
                 $bydel = $rad["navn"];
                 
                 //echo "<input type='checkbox' name='$bydel' id='$bydel'><label for='$bydel'>$bydel</label>";
                 echo "<label class='check'>{$bydel}
-                        <input type='checkbox' name='$bydel' id='$bydel'>
+                        <input type='checkbox' name='$bydel' id='$bydel' onclick='endreBydel(`{$num}`, `{$bydel}`)'>
                         <span class='checkmark'></span>
                       </label><br>";
+                $num ++;
               }
             ?>
+
+            <button class="button" onclick="sokFilter()">Oppdater søk</button>
           </div>
 
           <!--
@@ -184,58 +187,6 @@
       </div>
     </main>
 
-    <script>
-      let ikkeHenter = true;
-      let total = document.querySelector('#totalt').innerHTML;
-      let offset = 5;
-      let igjen = total.split(" ")[0] - offset;
-      let nummer = 1;
-
-      let container = document.querySelector('.container');
-      window.onscroll = function(ev) {
-      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && ikkeHenter) {
-          ikkeHenter = false;
-          igjen > 0 && hentData();
-      }
-      };
-
-      function hentData() {
-        let url = `http://127.0.0.1/NYC-reise/rest/attraksjon.php?num=${nummer}`;
-        fetch(url)
-          .then(function(response) {
-            return response.json();
-            })
-          .then(data => {
-            igjen -= offset; 
-            nummer ++;
-            data.forEach(element => {
-              let child = document.createElement("div");
-              child.setAttribute("class", "att");
-              child.innerHTML = `<a class='overLenke' href='${element.lenk}'></a>
-                    <div class='bilde'>
-                        <img src='${element.bilde}' alt='bilde av attraksjon'>
-                    </div>
-                    <div class='flex1'>
-                        <h2>${element.Navn}</h2>
-                        <p>Addresse: ${element.gatenr} ${element.addresse}, ${element.postnummer} ${element.Poststed}</p>
-                        <h4>${element.bydelNavn}</h4>
-                        <p>${element.tid}</p>
-                        <div class='kats col'>
-                          ${element.katRekke}
-                        </div>
-                    </div>`;
-              container.appendChild(child);
-            });
-            if(igjen > 0) {
-              ikkeHenter = true;
-            }
-          })
-      }
-
-      function filterTrykket() {
-        let fil = document.querySelector('.filtere');
-        fil.classList.toggle('aapen');
-      }
-    </script>
+    <script src="js/attraksjon.js"></script>
   </body>
 </html>

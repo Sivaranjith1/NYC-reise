@@ -419,7 +419,7 @@ textarea {
   cursor: pointer;
 }
 
-.filtere, .Allfiltere {
+.filtere, .Allfiltere, .besBoks {
   text-align: left;
 }
 
@@ -497,4 +497,32 @@ textarea {
 .filterKnapp {
   display: inline-block;
   padding: 8px 23px;
+}
+
+.melding {
+  background-color: #28a745;
+  padding: 0px;
+  border-radius: 18px;
+  color: white;
+  width: 90vw;
+  position: fixed;
+  z-index: 90;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  overflow: hidden;
+  max-height: 0;
+}
+
+.vis {
+  padding: 20px;
+  max-height: 100px;
+}
+
+.tips {
+  text-align: left;
+  background: #d6d6d6;
+  padding: 25px 30px;
+  margin: 15px 0;
 }
