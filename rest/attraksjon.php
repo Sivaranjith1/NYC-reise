@@ -91,6 +91,7 @@
                     $forjeId = $id;
 
                     $lenk = "attDetalje.php?id={$rad['id']}";
+                    
 
                     $aapningstid = $rad["aapningstid"];
                     $stengetid = $rad["stengetid"];

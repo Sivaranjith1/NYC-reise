@@ -27,13 +27,14 @@ fetch(url)
     data.forEach(element => {
         let child = document.createElement("div");
         child.setAttribute("class", "att");
+        let gatenr = element.gatenr == 0 ? '' : element.gatenr;
         child.innerHTML = `<a class='overLenke' href='${element.lenk}'></a>
             <div class='bilde'>
                 <img src='${element.bilde}' alt='bilde av attraksjon'>
             </div>
             <div class='flex1'>
                 <h2>${element.Navn}</h2>
-                <p>Addresse: ${element.gatenr} ${element.addresse}, ${element.postnummer} ${element.Poststed}</p>
+                <p>Addresse: ${gatenr} ${element.addresse}, ${element.postnummer} ${element.Poststed}</p>
                 <h4>${element.bydelNavn}</h4>
                 <p>${element.tid}</p>
                 <div class='kats col'>
