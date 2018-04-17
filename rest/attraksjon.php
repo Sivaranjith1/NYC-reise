@@ -14,7 +14,7 @@
             $json = [];
             //  $json[] = $rad;
 
-            $nummer = isset($_GET["num"]) ? $_GET["num"] : 2;
+            $nummer = isset($_GET["num"]) ? $_GET["num"] : 1;
             $offset = isset($_GET["offset"]) ? $_GET["offset"] : 5;
             $forskyvning = $offset * $nummer;
             $sqlArray = '';
@@ -34,6 +34,7 @@
             //selecter elementene
             $forjeId = 0;
             $katArray = [];
+            $katRekke = '';
             $sql = "SELECT * FROM mydb.attraksjon_kat {$nyArray} ORDER BY navn";
             $resultat = $kobling->query($sql);
             while ($rad = $resultat -> fetch_assoc()) {
@@ -42,10 +43,14 @@
 
                 if($id == $forjeId) {
                     $katArray[] = $kategori;
+                    $katRekke = $katRekke."<p>{$kategori}</p>";
                 } else {
 
                     if( isset($test) ){ 
                         $test["kat"] = $katArray;
+                        $test["tid"] = $tid;
+                        $test["lenk"] = $lenk;
+                        $test["katRekke"] = $katRekke;
                         $json[] = $test;
                     }
                     //var_dump($katArray);
@@ -53,13 +58,29 @@
                     $test = $rad;
 
                     $katArray = [];
+                    $katRekke = '';
                     $katArray[] = $kategori;
+                    $katRekke = $katRekke."<p>{$kategori}</p>";
                     $forjeId = $id;
+
+                    $lenk = "attDetalje.php?id={$rad['id']}";
+
+                    $aapningstid = $rad["aapningstid"];
+                    $stengetid = $rad["stengetid"];
+                    
+                    if ($aapningstid == '00:00:00' && $stengetid == '00:00:00') {
+                    $tid = 'Alltid åpen';
+                    } else {
+                    $tid = "{$aapningstid} - {$stengetid}";
+                    }
                 
                 }
             }
 
             $test["kat"] = $katArray;
+            $test["tid"] = $tid;
+            $test["lenk"] = $lenk;
+            $test["katRekke"] = $katRekke;
             $json[] = $test;
             //echo $ut;
             //var_dump($katArray);

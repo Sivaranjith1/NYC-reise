@@ -31,20 +31,29 @@
           echo "<div id='totalt'>{$totalt} resultater</div>";
         ?>
 
+        <div class="Allfiltere">
+        <h2 class="filterKnapp" onclick="filterTrykket()">Filtere</h2>
         <div class="filtere">
-          <h2>Filtere</h2>
-          <h4>Bydel</h4>
-          <?php
-          $sql = "SELECT * FROM bydel ORDER BY navn ASC";
-          $resultat = $kobling->query($sql);
 
-          while ($rad = $resultat -> fetch_assoc()) {
-            $bydel = $rad["navn"];
+          <div class="filterBox">
+            <h3>Bydel</h3>
+            <?php
+              $sql = "SELECT * FROM bydel ORDER BY navn ASC";
+              $resultat = $kobling->query($sql);
+              
+              while ($rad = $resultat -> fetch_assoc()) {
+                $bydel = $rad["navn"];
+                
+                //echo "<input type='checkbox' name='$bydel' id='$bydel'><label for='$bydel'>$bydel</label>";
+                echo "<label class='check'>{$bydel}
+                        <input type='checkbox' name='$bydel' id='$bydel'>
+                        <span class='checkmark'></span>
+                      </label><br>";
+              }
+            ?>
+          </div>
 
-            echo "<input type='checkbox' name='$bydel' id='$bydel'><label for='$bydel'>$bydel</label>";
-          }
-          ?>
-
+          <!--
           <input type="range" name="min" id="min">
           <label for="min">min</label>
           
@@ -62,6 +71,7 @@
 
           <h4>Kategorier</h4>
           <?php
+          /*
           $sql = "SELECT kategori FROM mydb.attraksjon_kat group by kategori ORDER BY kategori;";
           $resultat = $kobling->query($sql);
 
@@ -70,9 +80,11 @@
 
             echo "<input type='checkbox' name='$kategori' id='$kategori'><label for='$kategori'>$kategori</label>";
           }
+          */
           ?>
 
-          <button onclick="hentData()">Fetch</button>
+          <button onclick="hentData()">Fetch</button>-->
+        </div>
         </div>
 
         <?php
@@ -106,15 +118,20 @@
               $katRekke = $katRekke."<p>{$kategori}</p>";
             } else {
               if( isset($ut) ){ 
-                echo "<div class='att' style='background-color: hotpink;'>
+                echo "<div class='att'>
+                    <a class='overLenke' href='{$lenk}'></a>
+                    <div class='bilde'>
                         <img src='{$bilde}' alt='bilde av attraksjon'>
+                    </div>
+                    <div class='flex1'>
                         <h2>{$navn}</h2>
                         <p>Addresse: {$gatenr} {$addresse}, {$postnummer} {$poststed}</p>
                         <h4>{$bydel}</h4>
-                        <p>{$aapningstid} - {$stengetid}</p>
-                        <div class='kats'>
+                        <p>{$tid}</p>
+                        <div class='kats col'>
                           {$katRekke}
                         </div>
+                    </div>
                       </div>";
                }
               $katArray = [];
@@ -135,19 +152,31 @@
               $bydel = $rad["bydelNavn"];
               $postnummer = $rad["postnummer"];
               $poststed = $rad["Poststed"];
+              $lenk = "attDetalje.php?id={$rad['id']}";
+
+              if ($aapningstid == '00:00:00' && $stengetid == '00:00:00') {
+                $tid = 'Alltid åpen';
+              } else {
+                $tid = "{$aapningstid} - {$stengetid}";
+              }
               
               $ut = true;
             }
           }
-          echo "<div class='att' style='background-color: hotpink;'>
+          echo "<div class='att'>
+                    <a class='overLenke' href='{$lenk}'></a>
+                    <div class='bilde'>
                         <img src='{$bilde}' alt='bilde av attraksjon'>
+                    </div>
+                    <div class='flex1'>
                         <h2>{$navn}</h2>
                         <p>Addresse: {$gatenr} {$addresse}, {$postnummer} {$poststed}</p>
                         <h4>{$bydel}</h4>
-                        <p>{$aapningstid} - {$stengetid}</p>
-                        <div class='kats'>
+                        <p>{$tid}</p>
+                        <div class='kats col'>
                           {$katRekke}
                         </div>
+                    </div>
                       </div>";
           
         ?>
@@ -158,22 +187,54 @@
     <script>
       let ikkeHenter = true;
       let total = document.querySelector('#totalt').innerHTML;
-      let igjen = total;
+      let offset = 5;
+      let igjen = total.split(" ")[0] - offset;
+      let nummer = 1;
 
+      let container = document.querySelector('.container');
       window.onscroll = function(ev) {
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && ikkeHenter) {
-          console.log("buttom");
           ikkeHenter = false;
-          console.info(ikkeHenter);
+          igjen > 0 && hentData();
       }
       };
 
       function hentData() {
-        fetch("http://127.0.0.1/NYC-reise/rest/attraksjon.php")
+        let url = `http://127.0.0.1/NYC-reise/rest/attraksjon.php?num=${nummer}`;
+        fetch(url)
           .then(function(response) {
             return response.json();
             })
-          .then(data => console.log(data))
+          .then(data => {
+            igjen -= offset; 
+            nummer ++;
+            data.forEach(element => {
+              let child = document.createElement("div");
+              child.setAttribute("class", "att");
+              child.innerHTML = `<a class='overLenke' href='${element.lenk}'></a>
+                    <div class='bilde'>
+                        <img src='${element.bilde}' alt='bilde av attraksjon'>
+                    </div>
+                    <div class='flex1'>
+                        <h2>${element.Navn}</h2>
+                        <p>Addresse: ${element.gatenr} ${element.addresse}, ${element.postnummer} ${element.Poststed}</p>
+                        <h4>${element.bydelNavn}</h4>
+                        <p>${element.tid}</p>
+                        <div class='kats col'>
+                          ${element.katRekke}
+                        </div>
+                    </div>`;
+              container.appendChild(child);
+            });
+            if(igjen > 0) {
+              ikkeHenter = true;
+            }
+          })
+      }
+
+      function filterTrykket() {
+        let fil = document.querySelector('.filtere');
+        fil.classList.toggle('aapen');
       }
     </script>
   </body>

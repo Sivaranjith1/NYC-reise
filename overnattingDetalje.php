@@ -58,12 +58,81 @@
                 echo "</div></div>";
 
                 //skriv html for resten under her.
+        ?>
 
+        <div class="info">
+            <h1 class="navn"><?php echo $navn; ?></h1>
+            <div class="col">
+                <h3>Pris: <?php echo $pris; ?></h3>
+                <h3>Stjerner: <?php echo $stjerne; ?></h3>
+            </div>
+            <h3>Adresse: <?php echo "{$gatenr} {$addresse}, {$postnummer} {$poststed} {$bydel}"; ?></h3>
+            <div class="besBoks">
+                <p><?php echo $beskrivelse; ?></p>
+            </div>
+        </div>
+
+        <div class="space"></div>
+        <div class="footer">Flere overnattingsteder</div>
+        <?php
             }else {
                 die("Du må velge et overnattingssted.");
             }
         ?>
 
+
+        <?php
+            $sql = "SELECT * FROM mydb.overnatting_bilder group by id ORDER BY RAND() LIMIT 3;";
+            $resultat = $kobling->query($sql);
+            
+            while($rad = $resultat->fetch_assoc()) {
+                $id = $rad["id"];
+                $bildelink = $rad["bilde"];
+                $navn = $rad["navn"];
+                $bydel = $rad["bydel"];
+                $stjerner = $rad["stjerner"];
+                $beskrivelse = $rad["beskrivelse"];
+                $pris = $rad["pris"];
+                $adresse = $rad["addresse"];
+                $gatenr = $rad["gatenr"];
+
+        ?> 
+        <div class="overnatting">
+            <div class="overnattingbox">
+            <?php 
+                echo "<a class='overLenke' href='overnattingDetalje.php?id=$id'></a>"
+            ?>
+            <div class="overnattingbilde">
+            <?php 
+                echo "<img src='$bildelink' height='200px' width='300px'>";
+            ?>
+            </div>
+            <div class="overnattingnavn">
+            <?php
+                echo "$navn";
+            ?>
+            </div>
+            <div class="overnattingadresse">
+            <?php
+                echo "$adresse $gatenr, $bydel";
+            ?>
+            </div> 
+            <div class="overnattingstjerner">
+            <?php
+                echo "$stjerner stjerner";
+            ?>
+            </div>
+            <div class="overnattingstjerner">
+            <?php
+                echo "<br>$pris kr pr. natt";
+            ?>
+            </div>
+            </div>
+        </div>
+
+        <?php      
+            }
+        ?>
 
 
 

@@ -27,16 +27,27 @@
         </video>
 
         <center>
-        <img id="collage" src="bilder/collage.jpg" width="80%">
-        <?php
-          include_once 'yr/xml.php';
-        ?>
+          <div id="slideshow">
+          <div class="arrow-left" onclick="slideVenstre()"></div>
+          <div class="arrow-right" onclick="slideHoyre()"></div>
+          <div class='alleSlides'>
+            <div class="slide" style="left:0%;">
+              <img id="collage" src="bilder/collage.jpg" width="80%">
+            </div>
+            <div class="slide" style="left:100%;">
+              <?php
+               include_once 'yr/xml.php';
+              ?>
+            </div>
+          </div>
+          </div>
         </center>
       </div>
     <div class="footer">
        <p>NYC-Reise &trade;</p>
     </div>
 
+    <script src="js/slideshow.js"></script>
     <script>
       document.getElementById("ad").controls = false;
     </script>
