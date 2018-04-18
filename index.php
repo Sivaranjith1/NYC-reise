@@ -1,3 +1,4 @@
+<?php include_once "kobling.php"; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,9 +37,13 @@
             </div>
             <div class="slide" style="left:100%;">
               <?php
-               include_once 'yr/xml.php';
+               include_once 'include/xml.php';
               ?>
             </div>
+
+            <?php
+               include_once 'include/slideStart.php';
+              ?>
           </div>
           </div>
         </center>

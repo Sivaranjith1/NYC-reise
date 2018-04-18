@@ -1,7 +1,55 @@
 <?php
+    include_once "../kobling.php";
+    $lagt_til = false;
+    $altVirker = true;
     if(isset($_POST["slett"])) {
         $slett_id = $_POST["id"];
-        $altVirker = true;
+        $error = '';
+
+        $sql = "DELETE FROM tips WHERE attraksjonsnummer ='$slett_id'";
+        if($kobling->query($sql)) {
+        }else {
+          $error = $kobling->error;
+          $altVirker = false;
+        }
+
+        if($altVirker){
+          $sql = "DELETE FROM bilde WHERE attraksjonsnummer ='$slett_id'";
+          if($kobling->query($sql)) {
+          }else {
+            $error = $kobling->error;
+            $altVirker = false;
+          }
+        }
+
+        if($altVirker){
+          $sql = "DELETE FROM slide WHERE attraksjonsnummer ='$slett_id'";
+          if($kobling->query($sql)) {
+          }else {
+            $error = $kobling->error;
+            $altVirker = false;
+          }
+        }
+
+        if($altVirker){
+          $sql = "DELETE FROM kategori_attraksjon WHERE attraksjonsnummer ='$slett_id'";
+          if($kobling->query($sql)) {
+          }else {
+            $error = $kobling->error;
+            $altVirker = false;
+          }
+        }
+
+        if($altVirker){
+          $sql = "DELETE FROM attraksjon WHERE attraksjon_nummer ='$slett_id'";
+          if($kobling->query($sql)) {
+            $lagt_til = true;
+          }else {
+            $error = $kobling->error;
+            $altVirker = false;
+          }
+        }
+
     }
 ?>
 
@@ -26,11 +74,20 @@
       </div>
 
       <h1>Attraksjoner i New York.</h1>
-
-        <?php
-          include_once "../kobling.php";
-
-        ?>
+        <div class="varsel">
+          <?php
+            if($altVirker == false){
+              echo "<div class='red'><h1>";
+              echo "<strong>Varsel:</strong>";
+              echo $error;
+              echo "</h1></div>";
+            } else if($lagt_til){
+              echo "<div class='green'><h1>";
+              echo "Attraksjon ble slettet";
+              echo "</h1></div>";
+            }
+          ?>
+        </div>
 
         <?php
           //select ider
@@ -77,8 +134,12 @@
                         </div>
 
                         <form method='POST'>
-                        <input type='hidden' name='id' value='{$id}'>
+                        <input type='hidden' name='id' value='{$gammelId}'>
                         <input type='submit' style='z-index: 90;' value='slett' name='slett'>
+                        </form>
+                        <form method='GET' action='attEndre.php'>
+                        <input type='hidden' name='id' value='{$gammelId}'>
+                        <input type='submit' style='z-index: 90;' value='endre' name='endre'>
                         </form>
                     </div>
                       </div>";
@@ -90,6 +151,7 @@
               $forjeId = $id;
               
               //ny data
+              $gammelId = $rad["id"];
               $navn = $rad["Navn"];
               $aapningstid = $rad["aapningstid"];
               $stengetid = $rad["stengetid"];
@@ -125,8 +187,12 @@
                           {$katRekke}
                         </div>
                         <form method='POST'>
-                        <input type='hidden' name='id' value='{$id}'>
+                        <input type='hidden' name='id' value='{$gammelId}'>
                         <input type='submit' style='z-index: 90;' value='slett' name='slett'>
+                        </form>
+                        <form method='GET' action='attEndre.php'>
+                        <input type='hidden' name='id' value='{$gammelId}'>
+                        <input type='submit' style='z-index: 90;' value='endre' name='endre'>
                         </form>
                     </div>
                       </div>";

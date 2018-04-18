@@ -16,7 +16,7 @@
     $addresse = $_POST["addresse"];
     $gatenr = (isset($_POST["gatenr"]) ? $_POST["gatenr"] : null);
     $beskrivelse = $_POST["beskrivelse"];
-    $pris = (isset($_POST["pris"]) ? $_POST["pris"] : null);;
+    $pris = (isset($_POST["pris"]) ? $_POST["pris"] : null);
     
     $kategori = (isset($_POST["kat"]) ? $_POST["kat"] : []);
     $bildeIder = [];

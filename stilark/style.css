@@ -58,6 +58,10 @@ body {
     font-size: 16px;
 }
 
+.button:hover {
+  background-color: #333333;
+}
+
 .btn{
   color:#999;
   padding:10px 20px;
@@ -284,7 +288,7 @@ textarea {
   padding: 20px;
 }
 
-#vearNy {
+.vearNy {
   width: 100%;
   position: absolute;
   top: 155px;
@@ -526,4 +530,51 @@ textarea {
   background: #d6d6d6;
   padding: 25px 30px;
   margin: 15px 0;
+}
+
+.slideSelect {
+  padding: 5px;
+  position: relative;
+}
+
+.slideSelect input {
+  display: none;
+}
+
+.backSlide {
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.slideSelect input[type="checkbox"]:checked ~ .backSlide {
+  background-color: #28a745;
+}
+
+.slideButton {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 98%;
+  border-radius: 17px;
+}
+
+.slideButton a {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slideText {
+  top: auto;
+  bottom: 70px;
 }

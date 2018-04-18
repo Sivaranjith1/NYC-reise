@@ -12,6 +12,8 @@
       <div class="nav">
         <a href="../index.php" class="btn">Tilbake</a>
         <a href="nyAttraksjon.php" class="btn">Legg til Attraksjon</a>
+        <a href="alleAttraksjoner.php" class="btn">Endre / slett Attraksjon</a>
+        <a href="velgSlide.php" class="btn">bildefremvisning</a>
         <a href="nyovernatting.php" class="btn">Legg til Overnatting</a>
       </div>
         <div class="logo">

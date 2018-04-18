@@ -39,7 +39,7 @@
                 $start = "<div id='vearData'>
                             <img src='{$bilde}' alt='vær bilde'>
                             <h1 id='by'>{$by}</h1>
-                            <div id='vearNy'>
+                            <div class='vearNy'>
                 ";
             }
 

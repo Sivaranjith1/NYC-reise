@@ -44,7 +44,7 @@
 
                     if($forst) {
                         $navn = $rad["navn"];
-                        $pris = $rad["pris"];
+                        $pris = $rad["pris"] == 0 ? 'gratis' : $rad["pris"]." kr";
                         $addresse = $rad["addresse"];
                         $gatenr = $rad["gatenr"] == 0 ? '' : $rad["gatenr"];
                         $beskrivelse = $rad["beskrivelse"];
@@ -139,6 +139,10 @@
         <div class="footer">
             <p>NYC-Reise &trade;</p>
         </div>
+
+        <?php
+            include_once "include/loggingbilde.php";
+        ?>
     </div>
 
     <script src="js/slideshow.js"></script>

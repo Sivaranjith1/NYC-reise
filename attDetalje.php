@@ -162,6 +162,11 @@
         <div class="footer">
             <p>NYC-Reise &trade;</p>
         </div>
+
+
+        <?php
+            include_once "include/loggingbilde.php";
+        ?>
     </div>
 
     <script src="js/slideshow.js"></script>
