@@ -2,6 +2,7 @@
 
 if(isset($_POST["pass"])) {
     $bruker = mysqli_real_escape_string($kobling, $_POST["bruker"]);
+    $bruker = htmlspecialchars($bruker, ENT_QUOTES, 'UTF-8');
 
     $pass = mysqli_real_escape_string($kobling, $_POST["pass"]);
     $pass = $bruker.$pass;

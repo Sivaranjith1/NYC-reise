@@ -131,8 +131,8 @@
                         <p>Addresse: {$gatenr} {$addresse}, {$postnummer} {$poststed}</p>
                         <h4>{$bydel}</h4>
                         <p>{$tid}</p>
-                        <div class='kats col'>
-                          {$katRekke}
+                        <div class='col'>
+                          <p>Kategori: </p>{$katRekke}
                         </div>
                     </div>
                       </div>";
