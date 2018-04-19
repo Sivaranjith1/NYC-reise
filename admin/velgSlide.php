@@ -1,6 +1,7 @@
 <?php
     $error = '';
     include_once "../kobling.php";
+    include_once "../include/session.php";
     
     $sql = "SELECT attraksjonsnummer FROM mydb.slide;";
     $resultat = $kobling -> query($sql);

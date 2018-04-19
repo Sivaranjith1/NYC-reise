@@ -150,7 +150,7 @@ input:checked + .slider:before {
 
 
 
-input[type=text], select {
+input[type=text], input[type=password], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -577,4 +577,30 @@ textarea {
 .slideText {
   top: auto;
   bottom: 70px;
+}
+
+.graf {
+  /*width: 100%;*/
+  position: relative;
+}
+
+.graf div {
+  height: 100%;
+  background: #262626;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+table {
+  width: 100%;
+}
+
+.tabelNavn {
+  width: 270px;
+}
+
+table .antall {
+  width: 90px;
 }

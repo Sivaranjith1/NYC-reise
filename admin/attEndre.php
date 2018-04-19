@@ -1,5 +1,6 @@
 <?php
     include_once "../kobling.php";
+    include_once "../include/session.php";
     
     $lagt_til = false;
     $altVirker = true;

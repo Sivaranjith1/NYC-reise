@@ -1,5 +1,6 @@
 <?php
     include_once "../kobling.php";
+    include_once "../include/session.php";
     $lagt_til = false;
     $altVirker = true;
     if(isset($_POST["slett"])) {
@@ -15,6 +16,15 @@
 
         if($altVirker){
           $sql = "DELETE FROM bilde WHERE attraksjonsnummer ='$slett_id'";
+          if($kobling->query($sql)) {
+          }else {
+            $error = $kobling->error;
+            $altVirker = false;
+          }
+        }
+
+        if($altVirker){
+          $sql = "DELETE FROM logglinje WHERE Lattraksjonsnummer ='$slett_id'";
           if($kobling->query($sql)) {
           }else {
             $error = $kobling->error;

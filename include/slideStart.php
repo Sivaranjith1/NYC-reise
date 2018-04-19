@@ -29,7 +29,7 @@ while ($rad = $resultat -> fetch_assoc()) {
     $left= 100*$n;
     $n ++;
     echo "<div class='slide' style='left: {$left}%;background: #666;'>
-        <img src='$bilde' alt='bilde av overnatting'>
+        <img src='$bilde' alt='bilde av overnatting' style='object-fit: cover;'>
         <div class='vearNy cols slideText'>
         <h2>$navn</h2> <h2>$pris</h2>
         </div>

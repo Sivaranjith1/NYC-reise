@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php 
-  include "../kobling.php"; 
+  include "../kobling.php";
+  include_once "../include/session.php"; 
   $altVirker = true;
   $error = '';
   $lagt_til = false;
