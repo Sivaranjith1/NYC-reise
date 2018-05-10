@@ -5,6 +5,7 @@
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <main>
@@ -32,13 +33,20 @@
           echo "<div id='totalt'>{$totalt} resultater</div>";
         ?>
 
-        <div class="Allfiltere">
-        <h2 class="filterKnapp" onclick="filterTrykket()">Filtere</h2>
-        <div class="filtere">
+      
+      <div class="sook">
+        <input type="text" placeholder="Søk.." name="search" id="sookBar" onkeyup="getSok()">
+        <div class="suggest">
+        </div>
+      </div>
 
-          <div class="filterBox">
-            <h3>Bydel</h3>
-            <?php
+          <div class="Allfiltere">
+            <h2 class="filterKnapp" onclick="filterTrykket()">Filtere</h2>
+            <div class="filtere">
+              
+              <div class="filterBox">
+                <h3>Bydel</h3>
+                <?php
               $sql = "SELECT * FROM bydel ORDER BY navn ASC";
               $resultat = $kobling->query($sql);
               $num = 0;
@@ -189,5 +197,6 @@
     </main>
 
     <script src="js/attraksjon.js"></script>
+    <script src="js/sook.js"></script>
   </body>
 </html>

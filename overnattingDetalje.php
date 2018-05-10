@@ -5,6 +5,7 @@
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="container">
@@ -18,11 +19,26 @@
             <a href="admin/adminindex.php" class="btn">Admin</a>
         </div>
 
+        <div class="melding">
+            <div id="text"></div>
+        </div>
+
         <?php
             include_once 'kobling.php';
 
             if (isset($_GET["id"])) {
                 $id = $_GET["id"];
+
+                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips_overnatting where overnatting_idovernatting = {$id};";
+                $resultat = $kobling->query($sql);
+                while ($rad = $resultat->fetch_assoc()) {
+                    $gjenom = $rad["gjen"];
+                }
+                if($gjenom){
+                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2>";
+                } else { $rang = ""; }
+
+
                 $sql = "SELECT * FROM mydb.overnatting_bilder where id = $id;";
                 $resultat = $kobling->query($sql);
                 
@@ -67,9 +83,48 @@
                 <h3>Pris: <?php echo $pris; ?></h3>
                 <h3>Stjerner: <?php echo $stjerne; ?></h3>
             </div>
+            <?php echo $rang ?>
             <h3>Adresse: <?php echo "{$gatenr} {$addresse}, {$postnummer} {$poststed} {$bydel}"; ?></h3>
             <div class="besBoks">
                 <p><?php echo $beskrivelse; ?></p>
+            </div>
+        </div>
+
+
+        <?php 
+            $sql = "SELECT * FROM mydb.tips_overnatting where overnatting_idovernatting = {$id};";
+            $resultat = $kobling->query($sql);
+            $reisetips = '';
+            while ($rad = $resultat->fetch_assoc()) {
+                $tips = $rad["beskrivelse"];
+                $antall = $rad["idrangering"];
+                $stjerneDiv = "<div class='stjernerAll'>";
+                for($i = $antall; $i > 0; $i--) {
+                    $stjerneDiv = $stjerneDiv."<span class='fa fa-star'></span>";
+                }
+                $stjerneDiv = $stjerneDiv."</div>";
+                $reisetips = $reisetips."<div class='tips'><div class='flex1'>$tips</div>
+                $stjerneDiv
+                </div>";
+            }
+        ?>
+        <div class="space"></div>
+        <div class="tip">
+            <h2>Reisetips</h2>
+            <div id="alleTips">
+                <?php echo $reisetips; ?>
+            </div>
+
+            <textarea name="nyTips" id="nyTips" cols="30" rows="10" placeholder="Gi et reisetips"></textarea>
+            <div class="col">
+                <div class="stjerner">
+                    <span class="fa fa-star" onclick="stjerneTrykk(1)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(2)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(3)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(4)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(5)"></span>
+                </div>
+                <button class="button" onclick="sendTips('<?php echo $id;?>')">Send</button>
             </div>
         </div>
 
@@ -147,5 +202,6 @@
     </div>
 
     <script src="js/slideshow.js"></script>
+    <script src="js/restTips_overnatting.js"></script>
   </body>
 </html>

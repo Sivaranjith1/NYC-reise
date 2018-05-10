@@ -341,6 +341,10 @@ textarea {
   object-fit: contain;
 }
 
+.slide img {
+  object-fit: cover !important;
+}
+
 .alleSlides {
   position: relative;
   left: 0;
@@ -616,4 +620,48 @@ table .antall {
 
 .stjernerAll {
   margin: 0.5em 1em;
+}
+
+/*Search*/
+.sook input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 100%;
+  background: #f1f1f1;
+  margin: 0;
+}
+
+/* Clear floats */
+.sook::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.sook {
+  margin: 2em 0;
+  position: relative;
+}
+
+.suggest {
+  position: absolute;
+  top: 100%;
+  left:0;
+  right:0;
+  display: none;
+  z-index: 80;
+}
+
+#sookBar:focus + .suggest, .suggest:hover {
+  display: block;
+}
+
+.suggBox {
+  display: flex;
+  background: #999;
+  height: 100px;
+  border: #333333 solid 3px;
+  position: relative;
 }

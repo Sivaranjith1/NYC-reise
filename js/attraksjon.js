@@ -37,7 +37,8 @@ fetch(url)
                 <p>Addresse: ${gatenr} ${element.addresse}, ${element.postnummer} ${element.Poststed}</p>
                 <h4>${element.bydelNavn}</h4>
                 <p>${element.tid}</p>
-                <div class='kats col'>
+                <div class='col'>
+                    <p>Kategori: </p>
                     ${element.katRekke}
                 </div>
             </div>`;

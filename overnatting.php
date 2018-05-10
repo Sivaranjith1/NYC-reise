@@ -5,6 +5,13 @@
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      .overnattingbox {
+        height: 350px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -36,6 +43,10 @@
               $adresse = $rad["addresse"];
               $gatenr = $rad["gatenr"];
 
+              
+              $reg = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips_overnatting where overnatting_idovernatting = {$id};";
+              $gjen = $kobling->query($reg)->fetch_assoc()["gjen"];
+
       ?> 
       <div class="overnatting">
         <div class="overnattingbox">
@@ -65,6 +76,13 @@
         <div class="overnattingstjerner">
           <?php
             echo "<br>$pris kr pr. natt";
+          ?>
+        </div>
+        <div class="overnattingstjerner">
+          <?php
+            if($gjen){
+              echo "<br>Brukerrangering $gjen<span class='fa fa-star checked'></span>";
+            }
           ?>
         </div>
         </div>
