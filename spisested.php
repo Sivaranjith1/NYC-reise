@@ -13,11 +13,12 @@
         <a href="overnatting.php" class="btn">Overnatting</a>
         <a href="reisedit.php" class="btn">Reise dit</a>
         <a href="attraksjoner.php" class="btn">Attraksjoner</a>
+        <a href="spisested.php" class="btn">Spisesteder</a>
         <a href="about.php" class="btn">Om oss</a>
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>
 
-      <h1>Våre utvalgte hoteller i New York.</h1>
+      <h1>Våre utvalgte spisesteder i New York.</h1>
       <?php
         include_once("kobling.php");
 
@@ -25,21 +26,19 @@
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {
-              $id = $rad["id"];
               $bildelink = $rad["bilde"];
-              $navn = $rad["navn"];
-              $bydel = $rad["bydel"];
-              $stjerner = $rad["stjerner"];
+              $navn = $rad["resturant_navn"];
               $beskrivelse = $rad["beskrivelse"];
               $pris = $rad["pris"];
               $adresse = $rad["addresse"];
               $gatenr = $rad["gatenr"];
+              $id = $rad["idspisested"];
 
       ?> 
       <div class="overnatting">
         <div class="overnattingbox">
           <?php 
-            echo "<a class='overLenke' href='overnattingDetalje.php?id=$id'></a>"
+            echo "<a class='overLenke' href='spiseDetalje.php?id=$id'></a>"
           ?>
         <div class="overnattingbilde">
           <?php 
@@ -53,14 +52,9 @@
         </div>
         <div class="overnattingadresse">
           <?php
-            echo "$adresse $gatenr, $bydel";
+            echo "$adresse $gatenr";
           ?>
          </div> 
-        <div class="overnattingstjerner">
-          <?php
-            echo "$stjerner stjerner";
-          ?>
-        </div>
         <div class="overnattingstjerner">
           <?php
             echo "<br>$pris kr pr. natt";

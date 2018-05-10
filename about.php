@@ -14,6 +14,7 @@
         <a href="overnatting.php" class="btn">Overnatting</a>
         <a href="reisedit.php" class="btn">Reise dit</a>
         <a href="attraksjoner.php" class="btn">Attraksjoner</a>
+        <a href="spisested.php" class="btn">Spisesteder</a>
         <a href="about.php" class="btn">Om oss</a>
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>

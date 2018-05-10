@@ -37,7 +37,7 @@ function sendTips(id) {
                     stjerneDiv = stjerneDiv+"<span class='fa fa-star'></span>";
                 }
                 stjerneDiv = stjerneDiv+"</div>";
-                child.innerHTML = `<div class='tips'><div class='flex1'>${element.beskrivels}</div>${stjerneDiv}</div>`;
+                child.innerHTML = `<div class='flex1'>${element.beskrivels}</div>${stjerneDiv}`;
                 alleTips.appendChild(child);
             }            
             document.querySelector('#nyTips').value = '';
