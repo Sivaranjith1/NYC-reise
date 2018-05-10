@@ -526,6 +526,7 @@ textarea {
 }
 
 .tips {
+  display: flex;
   text-align: left;
   background: #d6d6d6;
   padding: 25px 30px;
@@ -603,4 +604,16 @@ table {
 
 table .antall {
   width: 90px;
+}
+
+.checked, .stjernerAll {
+  color: orange;
+}
+
+.stjerner {
+  font-size: 1.7em;
+}
+
+.stjernerAll {
+  margin: 0.5em 1em;
 }

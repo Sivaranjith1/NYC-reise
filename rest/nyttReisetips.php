@@ -10,10 +10,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $beskrivelse = mysqli_real_escape_string($kobling, $beskrivelse);
     $beskrivelse = htmlspecialchars($beskrivelse, ENT_QUOTES, 'UTF-8');
     $attID = mysqli_real_escape_string($kobling, $postBody->attID);
+    $stjerne = mysqli_real_escape_string($kobling, $postBody->stjerne);
     
 
-    $sql = "INSERT INTO `mydb`.`tips` (`beskrivelse`, `attraksjonsnummer`) 
-            VALUES ('$beskrivelse', '$attID');";
+    $sql = "INSERT INTO `mydb`.`tips` (`beskrivelse`, `attraksjonsnummer`, `idrangering`) 
+            VALUES ('$beskrivelse', '$attID', '$stjerne');";
 
     if ($kobling->query($sql)) {
         echo json_encode(['success' => '<strong>Nytt Tips</strong> har blitt registret.', 'beskrivels' => $beskrivelse]);

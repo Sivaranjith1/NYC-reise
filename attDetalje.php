@@ -5,6 +5,7 @@
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="container">
@@ -72,12 +73,29 @@
                     }
                 }
 
+                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips where attraksjonsnummer= {$id};";
+                $resultat = $kobling->query($sql);
+                while ($rad = $resultat->fetch_assoc()) {
+                    $gjenom = $rad["gjen"];
+                }
+                if($gjenom){
+                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2>";
+                } else { $rang = ""; }
+
                 $sql = "SELECT * FROM mydb.tips where attraksjonsnummer = {$id};";
                 $resultat = $kobling->query($sql);
                 $reisetips = '';
                 while ($rad = $resultat->fetch_assoc()) {
                     $tips = $rad["beskrivelse"];
-                    $reisetips = $reisetips."<div class='tips'>$tips</div>";
+                    $antall = $rad["idrangering"];
+                    $stjerneDiv = "<div class='stjernerAll'>";
+                    for($i = $antall; $i > 0; $i--) {
+                        $stjerneDiv = $stjerneDiv."<span class='fa fa-star'></span>";
+                    }
+                    $stjerneDiv = $stjerneDiv."</div>";
+                    $reisetips = $reisetips."<div class='tips'><div class='flex1'>$tips</div>
+                    $stjerneDiv
+                    </div>";
                 }
 
                 //skriv html for resten under her.
@@ -85,6 +103,7 @@
 
         <div class="info">
             <h1 class="navn"><?php echo $navn; ?></h1>
+            <?php echo $rang; ?>
             <div class="col">
                 <h3>Pris: <?php echo $pris; ?></h3>
                 <h3>Åpningstid: <?php echo $tid; ?></h3>
@@ -108,7 +127,16 @@
             </div>
 
             <textarea name="nyTips" id="nyTips" cols="30" rows="10" placeholder="Gi et reisetips"></textarea>
-            <button class="button" onclick="sendTips('<?php echo $id;?>')">Send</button>
+            <div class="col">
+                <div class="stjerner">
+                    <span class="fa fa-star" onclick="stjerneTrykk(1)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(2)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(3)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(4)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(5)"></span>
+                </div>
+                <button class="button" onclick="sendTips('<?php echo $id;?>')">Send</button>
+            </div>
         </div>
         <?php
             }else {
