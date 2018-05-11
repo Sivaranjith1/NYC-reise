@@ -665,3 +665,31 @@ table .antall {
   border: #333333 solid 3px;
   position: relative;
 }
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 175px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 50%;
+  transform: translateX(50%);
+  top: 100%;
+  background-color: #f5f5f5;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  color: black;
+  padding: 11px 0;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
