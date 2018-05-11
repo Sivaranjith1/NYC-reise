@@ -93,10 +93,10 @@
                     $lenk = "attDetalje.php?id={$rad['id']}";
                     
 
-                    $aapningstid = $rad["aapningstid"];
-                    $stengetid = $rad["stengetid"];
+                    $aapningstid = date("H:i", strtotime($rad["aapningstid"]));
+                    $stengetid = date("H:i", strtotime($rad["stengetid"]));
                     
-                    if ($aapningstid == '00:00:00' && $stengetid == '00:00:00') {
+                    if ($aapningstid == '00:00' && $stengetid == '00:00') {
                     $tid = 'Alltid åpen';
                     } else {
                     $tid = "{$aapningstid} - {$stengetid}";

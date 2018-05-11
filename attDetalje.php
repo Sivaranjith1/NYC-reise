@@ -56,8 +56,8 @@
                         $forste = false;
 
                         $navn = $rad["Navn"];
-                        $aapningstid = $rad["aapningstid"];
-                        $stengetid = $rad["stengetid"];
+                        $aapningstid = date("H:i", strtotime($rad["aapningstid"]));
+                        $stengetid = date("H:i", strtotime($rad["stengetid"]));
                         $addresse = $rad["addresse"];
                         $gatenr = $rad["gatenr"] == 0 ? '' : $rad["gatenr"];
                         $beskrivelse = $rad["beskrivelse"];
@@ -66,7 +66,7 @@
                         $postnummer = $rad["postnummer"];
                         $poststed = $rad["Poststed"];
 
-                        if ($aapningstid == '00:00:00' && $stengetid == '00:00:00') {
+                        if ($aapningstid == '00:00' && $stengetid == '00:00') {
                             $tid = 'Alltid åpen';
                         } else {
                             $tid = "{$aapningstid} - {$stengetid}";
@@ -74,13 +74,14 @@
                     }
                 }
 
-                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips where attraksjonsnummer= {$id};";
+                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen, count(idrangering) as antall FROM mydb.tips where attraksjonsnummer= {$id};";
                 $resultat = $kobling->query($sql);
                 while ($rad = $resultat->fetch_assoc()) {
                     $gjenom = $rad["gjen"];
+                    $antallTips = $rad["antall"];
                 }
                 if($gjenom){
-                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2>";
+                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2> <p>($antallTips anmeldelser)</p>";
                 } else { $rang = ""; }
 
                 $sql = "SELECT * FROM mydb.tips where attraksjonsnummer = {$id};";

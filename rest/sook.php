@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $beskrivelse = htmlspecialchars($beskrivelse, ENT_QUOTES, 'UTF-8');
     $json = [];
 
-    $sql = "SELECT Navn, pris, bilde, id FROM mydb.attraksjon_kat where navn LIKE '%$beskrivelse%' group by id  LIMIT 4;";
+    $sql = "SELECT Navn, pris, bilde, id FROM mydb.attraksjon_kat where navn LIKE '%$beskrivelse%' OR kategori LIKE '%$beskrivelse%' group by id  LIMIT 4;";
 
     $resultat = $kobling->query($sql);
     while ($rad = $resultat -> fetch_assoc()) {

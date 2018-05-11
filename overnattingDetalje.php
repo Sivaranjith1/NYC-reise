@@ -29,13 +29,14 @@
             if (isset($_GET["id"])) {
                 $id = $_GET["id"];
 
-                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips_overnatting where overnatting_idovernatting = {$id};";
+                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen, count(idrangering) as antall FROM mydb.tips_overnatting where overnatting_idovernatting = {$id};";
                 $resultat = $kobling->query($sql);
                 while ($rad = $resultat->fetch_assoc()) {
                     $gjenom = $rad["gjen"];
+                    $antallTips = $rad["antall"];
                 }
                 if($gjenom){
-                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2>";
+                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2><p>($antallTips anmeldelser)</p>";
                 } else { $rang = ""; }
 
 

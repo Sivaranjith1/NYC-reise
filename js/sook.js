@@ -8,6 +8,9 @@ function getSok() {
                 sugBox.innerHTML = '';
                 let child;
                 res.forEach(element => {
+                    if (element.pris === "0") {
+                        element.pris = "gratis";
+                    }
                     child = document.createElement("div");
                     child.setAttribute("class", "suggBox");
                     child.innerHTML = `

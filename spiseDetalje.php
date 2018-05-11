@@ -45,7 +45,7 @@
                     $left= 100*$n;
                     $n ++;
 
-                    echo "<div class='slide' style='left: {$left}%;'><img src='$bilde' alt='bilde av overnatting'></div>";
+                    echo "<div class='slide' style='left: {$left}%;'><img src='$bilde' alt='bilde av spisested'></div>";
 
                     if($forst) {
                         $navn = $rad["resturant_navn"];
@@ -77,10 +77,10 @@
 
         <div class="space"></div>
         
-        <div class="footer">Flere overnattingsteder</div>
+        <div class="footer">Flere spisesteder</div>
         <?php
             }else {
-                die("Du må velge et overnattingssted.");
+                die("Du må velge et spisested.");
             }
         ?>
 
@@ -136,10 +136,6 @@
         <div class="footer">
             <p>NYC-Reise &trade;</p>
         </div>
-
-        <?php
-            include_once "include/loggingbilde.php";
-        ?>
     </div>
 
     <script src="js/slideshow.js"></script>
