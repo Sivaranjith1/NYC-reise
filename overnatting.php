@@ -20,6 +20,10 @@
         width: 20%;
       }
 
+      input[type=submit]:hover {
+        padding: 14px 20px;
+      }
+
       form {
         width: 81%;
         display: block;
