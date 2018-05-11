@@ -22,7 +22,7 @@
       <?php
         include_once("kobling.php");
 
-        $sql = "SELECT * FROM mydb.bilde_spise JOIN spisested ON spisested_idspisested=idspisested group by idspisested ORDER BY resturant_navn DESC;";
+        $sql = "SELECT * FROM mydb.bilde_spise JOIN spisested ON spisested_idspisested=idspisested group by idspisested ORDER BY resturant_navn ASC;";
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {

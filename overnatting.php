@@ -11,6 +11,20 @@
       .overnattingbox {
         height: 350px;
       }
+      
+      select {
+        padding: 8px 14px;
+      }
+
+      input[type=submit] {
+        width: 20%;
+      }
+
+      form {
+        width: 81%;
+        display: block;
+        margin: auto;
+      }
     </style>
   </head>
   <body>
@@ -24,12 +38,33 @@
         <a href="about.php" class="btn">Om oss</a>
         <a href="admin/adminindex.php" class="btn">Admin</a>
       </div>
-
-      <h1>Våre utvalgte hoteller i New York.</h1>
-      <?php
+      <?php 
         include_once("kobling.php");
 
-        $sql = "SELECT * FROM mydb.overnatting_bilder group by id ORDER BY stjerner DESC;";
+        $sorter = isset($_GET["sorter"]) ? $_GET["sorter"] : "navn ASC";
+        $sorter = mysqli_real_escape_string($kobling, $sorter);
+      ?>
+
+      <h1>Våre utvalgte hoteller i New York.</h1>
+      <p>Sorter etter
+        <form action="" method="get">
+          <div class="col">
+          <select name="sorter" id="sorter">
+            <option value="navn ASC" <?php if($sorter == "navn ASC") { echo "selected"; } ?>>Navn stigende</option>
+            <option value="navn DESC" <?php if($sorter == "navn DESC") { echo "selected"; } ?>>Navn synkende</option>
+
+            <option value="pris ASC" <?php if($sorter == "pris ASC") { echo "selected"; } ?>>Pris stigende</option>
+            <option value="pris DESC" <?php if($sorter == "pris DESC") { echo "selected"; } ?>>Pris synkende</option>
+
+            <option value="stjerner ASC" <?php if($sorter == "stjerner ASC") { echo "selected"; } ?>>Stjerner stigende</option>
+            <option value="stjerner DESC" <?php if($sorter == "stjerner DESC") { echo "selected"; } ?>>Stjerner synkende</option>
+          </select>
+          <input type="submit" value="sorter" class="btn">
+          </div>
+        </form>
+      </p>
+      <?php
+        $sql = "SELECT * FROM mydb.overnatting_bilder group by id ORDER BY $sorter;";
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {
