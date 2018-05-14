@@ -5,6 +5,31 @@
     <title>NYC-reise</title>
     <link rel="stylesheet" href="stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      .overnattingbox {
+        height: 327px;
+      }
+      
+      select {
+        padding: 8px 14px;
+      }
+
+      input[type=submit] {
+        width: 20%;
+      }
+
+      input[type=submit]:hover {
+        padding: 14px 20px;
+      }
+
+      form {
+        width: 81%;
+        display: block;
+        margin: auto;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -27,6 +52,18 @@
 
             if (isset($_GET["id"])) {
                 $id = $_GET["id"];
+
+                $sql = "SELECT ROUND(AVG(idrangering), 2) as gjen, count(idrangering) as antall FROM mydb.tips_spisested where spisested_idspisested = {$id};";
+                $resultat = $kobling->query($sql);
+                while ($rad = $resultat->fetch_assoc()) {
+                    $gjenom = $rad["gjen"];
+                    $antallTips = $rad["antall"];
+                }
+                if($gjenom){
+                    $rang = "<h2>Brukerrangering: $gjenom<span class='fa fa-star checked'></span></h2><p>($antallTips anmeldelser)</p>";
+                } else { $rang = ""; }
+
+
                 $sql = "SELECT * FROM mydb.bilde_spise JOIN spisested ON spisested_idspisested=idspisested JOIN poststed ON spisested.poststed=postnummer Join bydel on poststed.idbydel = bydel.idbydel where idspisested = {$id} ORDER BY resturant_navn DESC;";
                 $resultat = $kobling->query($sql);
                 
@@ -69,6 +106,7 @@
             <div class="col">
                 <h3>Pris: <?php echo $pris; ?></h3>
             </div>
+            <?php echo $rang ?>
             <h3>Adresse: <?php echo "{$gatenr} {$addresse}, {$postnummer} {$poststed} {$bydel}"; ?></h3>
             <div class="besBoks">
                 <p><?php echo $beskrivelse; ?></p>
@@ -77,12 +115,50 @@
 
         <div class="space"></div>
         
-        <div class="footer">Flere spisesteder</div>
         <?php
             }else {
                 die("Du må velge et spisested.");
             }
         ?>
+        <?php 
+            $sql = "SELECT * FROM mydb.tips_spisested where spisested_idspisested = {$id};";
+            $resultat = $kobling->query($sql);
+            $reisetips = '';
+            while ($rad = $resultat->fetch_assoc()) {
+                $tips = $rad["beskrivelse"];
+                $antall = $rad["idrangering"];
+                $stjerneDiv = "<div class='stjernerAll'>";
+                for($i = $antall; $i > 0; $i--) {
+                    $stjerneDiv = $stjerneDiv."<span class='fa fa-star'></span>";
+                }
+                $stjerneDiv = $stjerneDiv."</div>";
+                $reisetips = $reisetips."<div class='tips'><div class='flex1'>$tips</div>
+                $stjerneDiv
+                </div>";
+            }
+        ?>
+        <div class="space"></div>
+        <div class="tip">
+            <h2>Reisetips</h2>
+            <div id="alleTips">
+                <?php echo $reisetips; ?>
+            </div>
+
+            <textarea name="nyTips" id="nyTips" cols="30" rows="10" placeholder="Gi et reisetips"></textarea>
+            <div class="col">
+                <div class="stjerner">
+                    <span class="fa fa-star" onclick="stjerneTrykk(1)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(2)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(3)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(4)"></span>
+                    <span class="fa fa-star" onclick="stjerneTrykk(5)"></span>
+                </div>
+                <button class="button" onclick="sendTips('<?php echo $id;?>')">Send</button>
+            </div>
+        </div>
+
+        <div class="space"></div>
+        <div class="footer">Flere spisesteder</div>
 
 
         <?php
@@ -99,6 +175,9 @@
               $adresse = $rad["addresse"];
               $gatenr = $rad["gatenr"];
               $id = $rad["idspisested"];
+
+              $reg = "SELECT ROUND(AVG(idrangering), 2) as gjen FROM mydb.tips_spisested where spisested_idspisested = {$id};";
+              $gjen = $kobling->query($reg)->fetch_assoc()["gjen"];
 
       ?> 
       <div class="overnatting">
@@ -123,11 +202,19 @@
          </div> 
         <div class="overnattingstjerner">
           <?php
-            echo "<br>$pris kr pr. natt";
+            echo "<br>$pris kr";
+          ?>
+        </div>
+        <div class="overnattingstjerner">
+          <?php
+            if($gjen){
+              echo "<br>Brukerrangering $gjen<span class='fa fa-star checked'></span>";
+            }
           ?>
         </div>
         </div>
       </div>
+      
 
         <?php      
             }
@@ -139,5 +226,6 @@
     </div>
 
     <script src="js/slideshow.js"></script>
+    <script src="js/restTips_spisested.js"></script>
   </body>
 </html>

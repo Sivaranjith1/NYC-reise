@@ -47,12 +47,12 @@ function sendTips(id) {
             let checked = document.querySelectorAll('.checked');
             checked.forEach(elem => elem.classList.remove('checked'));
         })
-    } else if(tipsBoks != '') {
+    } else if(tipsBoks == '') {
         let melding = 'Tekstboksen kan ikke være tom';
         textBoks.innerHTML = melding;
         meldingBoks.style.backgroundColor = "#d9534f";
         visMelding();
-    } else if (antallStjerne != 0) {
+    } else if (antallStjerne == 0) {
         let melding = 'Man må velge stjerner';
         textBoks.innerHTML = melding;
         meldingBoks.style.backgroundColor = "#d9534f";

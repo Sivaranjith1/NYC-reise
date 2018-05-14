@@ -18,7 +18,7 @@ function stjerneTrykk(number) {
 function sendTips(id) {
     let tipsBoks = document.querySelector('#nyTips').value;
     if(tipsBoks != '' && antallStjerne != 0) {
-        fetch('http://127.0.0.1/NYC-reise/rest/nyttReisetips.php', {
+        fetch('http://127.0.0.1/NYC-reise/rest/nyttReisetipsSpisested.php', {
         method: "POST",
         body: JSON.stringify({bes: tipsBoks, attID: id, stjerne: antallStjerne})
         })
