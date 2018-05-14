@@ -150,7 +150,7 @@
         <div class="footer">Flere attraksjoner</div>
 
         <?php
-            $sql = "SELECT * FROM mydb.attraksjon_kat group by id ORDER BY Rand() LIMIT 5;";
+            $sql = "SELECT * FROM mydb.attraksjon_kat where id != {$id} group by id ORDER BY Rand() LIMIT 5;";
             $resultat = $kobling->query($sql);
             while($rad = $resultat ->fetch_assoc()){
                 $navn = $rad["Navn"];

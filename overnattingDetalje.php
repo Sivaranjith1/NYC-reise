@@ -163,7 +163,7 @@
 
 
         <?php
-            $sql = "SELECT * FROM mydb.overnatting_bilder group by id ORDER BY RAND() LIMIT 3;";
+            $sql = "SELECT * FROM mydb.overnatting_bilder where id != {$id} group by id ORDER BY RAND() LIMIT 3;";
             $resultat = $kobling->query($sql);
             
             while($rad = $resultat->fetch_assoc()) {

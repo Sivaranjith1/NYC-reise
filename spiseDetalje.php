@@ -162,9 +162,8 @@
 
 
         <?php
-        include_once("kobling.php");
 
-        $sql = "SELECT * FROM mydb.bilde_spise JOIN spisested ON spisested_idspisested=idspisested group by idspisested ORDER BY RAND() LIMIT 3;";
+        $sql = "SELECT * FROM mydb.bilde_spise JOIN spisested ON spisested_idspisested=idspisested  where idspisested != {$id} group by idspisested ORDER BY RAND() LIMIT 3;";
         $resultat = $kobling->query($sql);
         
           while($rad = $resultat->fetch_assoc()) {
