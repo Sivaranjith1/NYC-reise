@@ -24,7 +24,7 @@ if(isset($_POST["pass"])) {
 }
 
 if(isset($_SESSION["brukernavn"])){}else {
-    echo '<h1>Login</h1>';
+    echo '<h1>Logg inn</h1>';
 
     echo '<form action="" method="post">
             <input type="text" name="bruker" placeholder="brukernavn" required>

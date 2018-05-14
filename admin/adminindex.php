@@ -60,7 +60,7 @@
             $fornavn = $_SESSION["fornavn"];
             $etternavn = $_SESSION["etternavn"];
             echo "<h1>Hei $fornavn $etternavn</h1>";
-            echo '<form action="" method="post"><input type="submit" value="log ut" name="log"></form>';
+            echo '<form action="" method="post"><input type="submit" value="logg ut" name="log"></form>';
             $loggetInn = true;
           } else {
             
