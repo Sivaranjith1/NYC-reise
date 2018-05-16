@@ -17,6 +17,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES ('$beskrivelse', '$attID', '$stjerne');";
 
     if ($kobling->query($sql)) {
+        $sisteID = $kobling->insert_id;
+        $sql = "SELECT * FROM mydb.tips_overnatting where idtips = $sisteID";
+        $beskrivelse = $kobling->query($sql)->fetch_assoc()["beskrivelse"];
         echo json_encode(['success' => '<strong>Nytt Tips</strong> har blitt registret.', 'beskrivels' => $beskrivelse]);
         http_response_code(200);
     } else {

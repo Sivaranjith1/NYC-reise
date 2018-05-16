@@ -114,7 +114,7 @@
         </div>
         <div class="overnattingstjerner">
           <?php
-            echo "<br>$pris kr pr. natt";
+            echo "<br>$pris kr pr. natt for enkelrom";
           ?>
         </div>
         <div class="overnattingstjerner">

@@ -237,6 +237,6 @@
     </div>
 
     <script src="js/slideshow.js"></script>
-    <script src="js/restTips_overnatting.js"></script>
+    <script src="js/restTips_overnattingU.js"></script>
   </body>
 </html>
