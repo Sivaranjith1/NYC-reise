@@ -17,7 +17,7 @@
 
         <div class="btn dropdown"><span>Spisested</span>
           <div class="dropdown-content">
-            <a href="nyovernatting.php" class="btn">Ny Spisested</a>
+            <a href="nySpisested.php" class="btn">Ny Spisested</a>
             <a href="alleSpisesteder.php" class="btn">Endre / slett Spisested</a>
           </div>
         </div>
