@@ -18,11 +18,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sisteID = $kobling->insert_id;
         $sql = "SELECT * FROM mydb.tips_overnatting where idtips = $sisteID";
         $beskrivelse = $kobling->query($sql)->fetch_assoc()["beskrivelse"];
-        echo json_encode(['success' => '<strong>Nytt Tips</strong> har blitt registret.', 'beskrivels' => $beskrivelse]);
+        echo json_encode(['success' => '<strong>Nytt Tips</strong> har blitt registret. '.$sql.'', 'beskrivels' => $beskrivelse]);
         http_response_code(200);
     } else {
         $error = $kobling->error;
-        echo json_encode(['error' => $error]);
+        echo json_encode(['error' => "$error $sql"]);
         http_response_code(409);
     }
 

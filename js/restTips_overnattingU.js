@@ -63,5 +63,5 @@ function sendTips(id) {
 
 function visMelding() {
     meldingBoks.classList.add("vis");
-    setTimeout(function(){ meldingBoks.classList.remove("vis");; }, 3000);
+    setTimeout(function(){ meldingBoks.classList.remove("vis");; }, 30000);
 }

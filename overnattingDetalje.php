@@ -101,7 +101,7 @@
 
                 //skriv html for resten under her.
         ?>
-
+        <!--<a href="overnattingDetaljeU.php?id=<?php echo $id; ?>">Ubeskyttet</a>-->
         <div class="info">
             <h1 class="navn"><?php echo $navn; ?></h1>
             <div class="col">

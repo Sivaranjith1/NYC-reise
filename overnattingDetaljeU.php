@@ -23,12 +23,6 @@
       input[type=submit]:hover {
         padding: 14px 20px;
       }
-
-      form {
-        width: 81%;
-        display: block;
-        margin: auto;
-      }
     </style>
   </head>
   <body>
@@ -40,7 +34,7 @@
             <a href="attraksjoner.php" class="btn">Attraksjoner</a>
             <a href="spisested.php" class="btn">Spisesteder</a>
             <a href="about.php" class="btn">Om oss</a>
-            <a href="admin/adminindex.php" class="btn">Admin</a>
+            <a href="admin/adminindex.php" id="admin" class="btn">Admin</a>
         </div>
 
         <div class="melding">
@@ -139,7 +133,7 @@
             <div id="alleTips">
                 <?php echo $reisetips; ?>
             </div>
-
+            
             <textarea name="nyTips" id="nyTips" cols="30" rows="10" placeholder="Gi et reisetips"></textarea>
             <div class="col">
                 <div class="stjerner">

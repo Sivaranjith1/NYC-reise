@@ -46,7 +46,7 @@
         include_once("kobling.php");
 
         $sorter = isset($_GET["sorter"]) ? $_GET["sorter"] : "navn ASC";
-        $sorter = mysqli_real_escape_string($kobling, $sorter);
+        //$sorter = mysqli_real_escape_string($kobling, $sorter);
       ?>
 
       <h1>Våre utvalgte hoteller i New York.</h1>
