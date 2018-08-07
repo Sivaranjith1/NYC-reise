@@ -11,14 +11,14 @@
         <div class="btn dropdown"><span>Overnatting</span>
           <div class="dropdown-content">
             <a href="nyovernatting.php" class="btn">Ny Overnatting</a>
-            <a href="alleAttraksjoner.php" class="btn">Endre / slett Overnatting</a>
+            <a href="alleOvernatting.php" class="btn">Endre / slett Overnatting</a>
           </div>
         </div>
 
         <div class="btn dropdown"><span>Spisested</span>
           <div class="dropdown-content">
             <a href="nyovernatting.php" class="btn">Ny Spisested</a>
-            <a href="alleAttraksjoner.php" class="btn">Endre / slett Spisested</a>
+            <a href="alleSpisesteder.php" class="btn">Endre / slett Spisested</a>
           </div>
         </div>
 

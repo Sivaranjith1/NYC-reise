@@ -700,3 +700,19 @@ table .antall {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.green{
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+  font-size: x-small;
+}
+
+.red{
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+  font-size: x-small;
+}

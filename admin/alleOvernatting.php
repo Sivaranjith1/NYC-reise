@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>NYC-reise</title>
-    <link rel="stylesheet" href="stilark/style.css">
+    <link rel="stylesheet" href="../stilark/style.css">
     <link href='https://fonts.googleapis.com/css?family=Text Me One' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
       .overnattingbox {
-        height: 350px;
+        height: 400px;
       }
       
       select {
@@ -17,7 +17,7 @@
       }
 
       input[type=submit] {
-        width: 20%;
+        width: 40%;
       }
 
       input[type=submit]:hover {
@@ -29,25 +29,79 @@
         display: block;
         margin: auto;
       }
+
+      .inline{
+          display: inline;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="nav">
-        <a href="index.php" class="btn">Hjem</a>
-        <a href="overnatting.php" class="btn">Overnatting</a>
-        <a href="reisedit.php" class="btn">Reise dit</a>
-        <a href="attraksjoner.php" class="btn">Attraksjoner</a>
-        <a href="spisested.php" class="btn">Spisesteder</a>
-        <a href="about.php" class="btn">Om oss</a>
-        <a href="admin/adminindex.php" class="btn">Admin</a>
-      </div>
       <?php 
-        include_once("kobling.php");
+        include_once "vanligNav.php";
+        include_once("../kobling.php");
+
+        $lagt_til = false;
+        $altVirker = true;
+        if(isset($_POST["slett"])) {
+            $slett_id = $_POST["id"];
+            $error = '';
+
+            $sql = "DELETE FROM tips_overnatting WHERE overnatting_idovernatting ='$slett_id'";
+            if($kobling->query($sql)) {
+            }else {
+            $error = $kobling->error;
+            $altVirker = false;
+            }
+
+            if($altVirker){
+            $sql = "DELETE FROM bilde WHERE idovernatting ='$slett_id'";
+            if($kobling->query($sql)) {
+            }else {
+                $error = $kobling->error;
+                $altVirker = false;
+            }
+            }
+
+            if($altVirker){
+            $sql = "DELETE FROM logglinje WHERE Lidovernatting ='$slett_id'";
+            if($kobling->query($sql)) {
+            }else {
+                $error = $kobling->error;
+                $altVirker = false;
+            }
+            }
+
+            if($altVirker){
+            $sql = "DELETE FROM overnatting WHERE idovernatting ='$slett_id'";
+            if($kobling->query($sql)) {
+                $lagt_til = true;
+            }else {
+                $error = $kobling->error;
+                $altVirker = false;
+            }
+            }
+
+        }
 
         $sorter = isset($_GET["sorter"]) ? $_GET["sorter"] : "navn ASC";
         $sorter = mysqli_real_escape_string($kobling, $sorter);
       ?>
+
+      <div class="varsel">
+          <?php
+            if($altVirker == false){
+              echo "<div class='red'><h1>";
+              echo "<strong>Varsel:</strong>";
+              echo $error;
+              echo "</h1></div>";
+            } else if($lagt_til){
+              echo "<div class='green'><h1>";
+              echo "Overnattingsted ble slettet";
+              echo "</h1></div>";
+            }
+          ?>
+        </div>
 
       <h1>Våre utvalgte hoteller i New York.</h1>
       <p>Sorter etter
@@ -90,11 +144,11 @@
       <div class="overnatting">
         <div class="overnattingbox">
           <?php 
-            echo "<a class='overLenke' href='overnattingDetalje.php?id=$id'></a>"
+            //echo "<a class='overLenke' href='overnattingDetalje.php?id=$id'></a>"
           ?>
         <div class="overnattingbilde">
           <?php 
-            echo "<img src='$bildelink' height='200px' width='300px'>";
+            echo "<img src='../$bildelink' height='200px' width='300px'>";
           ?>
         </div>
         <div class="overnattingnavn">
@@ -122,6 +176,18 @@
             if($gjen){
               echo "<br>Brukerrangering $gjen<span class='fa fa-star checked'></span>";
             }
+          ?>
+        </div>
+        <div class="overnattingstjerner">
+          <?php
+            echo "<form method='POST' class='inline'>
+            <input type='hidden' name='id' value='{$id}'>
+            <input type='submit' style='z-index: 90;' value='slett' name='slett'>
+            </form>
+            <form method='GET' action='overnattingEndre.php' class='inline'>
+            <input type='hidden' name='id' value='{$id}'>
+            <input type='submit' style='z-index: 90;' value='endre' name='endre'>
+            </form>";
           ?>
         </div>
         </div>
